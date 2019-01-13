@@ -2,35 +2,63 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://JD1412.github.io/about/index.html</loc>
+    <loc>https://github.com/JD1412/JD1412.github.io.git//404.html</loc>
+    
+    <lastmod>2019-01-13T12:54:46.496Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/JD1412/JD1412.github.io.git/commonweal/index.html</loc>
+    
+    <lastmod>2019-01-13T12:37:02.080Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/JD1412/JD1412.github.io.git/404.html</loc>
+    
+    <lastmod>2019-01-13T12:35:53.600Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/JD1412/JD1412.github.io.git/about/index.html</loc>
+    
+    <lastmod>2019-01-13T11:24:38.708Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/JD1412/JD1412.github.io.git/2019/01/13/Wiki-test/</loc>
+    
+    <lastmod>2019-01-13T05:20:08.513Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/JD1412/JD1412.github.io.git/categories/index.html</loc>
     
     <lastmod>2019-01-13T04:50:15.029Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://JD1412.github.io/categories/index.html</loc>
+    <loc>https://github.com/JD1412/JD1412.github.io.git/tags/index.html</loc>
     
     <lastmod>2019-01-13T04:50:15.029Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://JD1412.github.io/tags/index.html</loc>
-    
-    <lastmod>2019-01-13T04:50:15.029Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://JD1412.github.io/wiki/Hello-Github/</loc>
+    <loc>https://github.com/JD1412/JD1412.github.io.git/2019/01/13/Hello-Github/</loc>
     
     <lastmod>2019-01-13T04:33:29.366Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://JD1412.github.io/wiki/hello-world/</loc>
+    <loc>https://github.com/JD1412/JD1412.github.io.git/2019/01/13/hello-world/</loc>
     
     <lastmod>2019-01-13T04:20:54.378Z</lastmod>
     
