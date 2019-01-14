@@ -103,8 +103,8 @@
       </categories>
       <tags>
         <tag>PWN</tag>
-        <tag>CANARY</tag>
         <tag>Writeup</tag>
+        <tag>CANARY</tag>
         <tag>格式化字符串</tag>
       </tags>
   </entry>
@@ -196,8 +196,8 @@
       </categories>
       <tags>
         <tag>ARP欺骗</tag>
-        <tag>Ettercap</tag>
         <tag>arpspoof</tag>
+        <tag>Ettercap</tag>
         <tag>KALI</tag>
       </tags>
   </entry>
@@ -369,8 +369,8 @@
         <category>渗透测试</category>
       </categories>
       <tags>
+        <tag>Metasploit</tag>
         <tag>meterpreter</tag>
-        <tag>Meatsploit</tag>
         <tag>木马</tag>
       </tags>
   </entry>
@@ -382,7 +382,7 @@
         <category>渗透测试</category>
       </categories>
       <tags>
-        <tag>Meatsploit</tag>
+        <tag>Metasploit</tag>
       </tags>
   </entry>
   <entry>
@@ -393,7 +393,7 @@
         <category>渗透测试</category>
       </categories>
       <tags>
-        <tag>Meatsploit</tag>
+        <tag>Metasploit</tag>
       </tags>
   </entry>
   <entry>
