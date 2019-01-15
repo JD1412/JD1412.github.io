@@ -774,6 +774,10 @@
           
 
   
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
 
 
 
@@ -1252,12 +1256,7 @@
 
   
   
-
-
-
-
-
-
+    
 
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
@@ -1269,18 +1268,41 @@
 
 <script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
 
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '',
+          clientSecret: '',
+          repo: 'github.com/JD1412/Blog_comments.git',
+          owner: '',
+          admin: [''],
+          id: location.pathname,
+          distractionFreeMode: ''
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+<!--
 <script>
   var gitalk = new Gitalk({
-    clientID: '',
-    clientSecret: '',
-    repo: '',
-    owner: '',
-    admin: [''],
+    clientID: '55c8f82af5d9e841c8e3',
+    clientSecret: 'f01d4c7af93678a0cd4f7e6e5fe71b36d1e44dbe',
+    repo: 'github.com/JD1412/Blog_comments.git',
+    owner: 'JD1412',
+    admin: ['JD1412'],
     id: md5(location.pathname),
     distractionFreeMode: 'true'
   });
   gitalk.render('gitalk-container');
 </script>
+-->
+  
+
+
+
+
+
 
 
   
