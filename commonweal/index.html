@@ -523,11 +523,10 @@
           
 
   
-    <div class="comments" id="gitalk-container">
+    <div class="comments id=" gitalk-container"="">
     </div>
 
   
-
 
 
         </div>
@@ -993,33 +992,20 @@
 
   <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
   <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
    <script type="text/javascript">
         var gitalk = new Gitalk({
           clientID: '',
           clientSecret: '',
-          repo: 'jd1412.github.io',
+          repo: 'MY_Blog',
           owner: '',
           admin: [''],
-          id: location.pathname,
+          id: md5(window.location.pathname),
           distractionFreeMode: ''
         })
-        gitalk.render('gitalk-container')           
+        gitalk.render('gitalk-container')
        </script>
 
-<!--
-<script>
-  var gitalk = new Gitalk({
-    clientID: 'f636bde2a3e6476a1e26',
-    clientSecret: '27e3a0456bdd3f629cb2a112ced1ce4e61e38e4c',
-    repo: 'jd1412.github.io',
-    owner: 'JD1412',
-    admin: ['JD1412'],
-    id: md5(location.pathname),
-    distractionFreeMode: 'true'
-  });
-  gitalk.render('gitalk-container');
-</script>
--->
   
 
 
