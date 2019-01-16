@@ -535,6 +535,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/14/Kali安装后更新配置/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/01/14/Kali安装后更新配置/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -660,7 +670,10 @@ apt-get dist-upgrade
           
 
   
-    <div class="comments id=" gitalk-container"="">
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
     </div>
 
   
@@ -1141,33 +1154,45 @@ apt-get dist-upgrade
 
   
   
-    
+    <!-- LOCAL: You can save these files to your site and update links -->
 
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitmint.browser.js"></script>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css">
+<!-- END LOCAL -->
 
+<style>
+#gitment-container a {
+  border-bottom: none;
+}
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+</style>
 
+<script>
+  function renderGitment() {
+    var gitment = new Gitmint({
+      id: window.location.pathname,
+      owner: 'JD1412',
+      repo: 'JD1412.github.io',
+      
+        lang: 'zh-CN' || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+      
+      oauth: {
+      
+      
+        client_secret: '27e3a0456bdd3f629cb2a112ced1ce4e61e38e4c',
+      
+        client_id: 'f636bde2a3e6476a1e26'
+      }
+    });
+    gitment.render('gitment-container');
+  }
 
-
-<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
-
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
-   <script type="text/javascript">
-        var gitalk = new Gitalk({
-          clientID: '',
-          clientSecret: '',
-          repo: 'MY_Blog',
-          owner: '',
-          admin: [''],
-          id: md5(window.location.pathname),
-          distractionFreeMode: ''
-        })
-        gitalk.render('gitalk-container')
-       </script>
+  
+    renderGitment();
+  
+</script>
 
   
 
