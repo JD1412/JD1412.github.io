@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/JD1412/JD1412.github.io.git/"/>
-  <updated>2019-01-15T07:22:18.570Z</updated>
+  <updated>2019-02-23T08:37:38.379Z</updated>
   <id>https://github.com/JD1412/JD1412.github.io.git/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>WiFi_pineapples初始化</title>
+    <link href="https://github.com/JD1412/JD1412.github.io.git/2019/02/23/WiFi-pineapples%E5%88%9D%E5%A7%8B%E5%8C%96/"/>
+    <id>https://github.com/JD1412/JD1412.github.io.git/2019/02/23/WiFi-pineapples初始化/</id>
+    <published>2019-02-23T08:18:43.000Z</published>
+    <updated>2019-02-23T08:37:38.379Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a><h1 id="WIFI-Pinapple使用说明"><a href="#WIFI-Pinapple使用说明" class="headerlink" title="WIFI Pinapple使用说明"></a><strong>WIFI Pinapple使用说明</strong></h1><hr><h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul><li><a href="#kaiji">开机加电</a></li><li><a href="#web">登录WEB界面</a></li><li><a href="#ssh">SSH连接</a></li><li><a href="#internet">连接互联网</a></li><li><a href="#modules">安装插件模块</a><ul><li><a href="#SD_card">安装SD卡</a></li></ul></li><li><a href="#begin">界面初识</a></li><li><a href="#module">插件简介</a></li></ul><p>找到一个WIFI pinapple，不知道怎么用，这篇笔记用来记录这个东西如何使用的</p><p><span id="kaiji"></span></p><h2 id="加电开机"><a href="#加电开机" class="headerlink" title="加电开机"></a>加电开机</h2><blockquote><p>两个USB接口，第一反应往自己的电脑上面连接，发现自己的电脑连上之后就上不了网了，其实很简单拿个充电宝供电就可以了，和下面的这个教程上的有一点点不一样</p></blockquote><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/kaiji.png" title="WiFi_pineapples初始化"><p><span id="web"></span></p><h2 id="登录WEB界面"><a href="#登录WEB界面" class="headerlink" title="登录WEB界面"></a>登录WEB界面</h2><blockquote><p>登录web界面需要另一个网卡，就是一个保证自己电脑的上网，另一个保证连接这个WiFiPineapple</p></blockquote><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/web.png" title="WiFi_pineapples初始化"><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/web2.png" title="WiFi_pineapples初始化"><p>按照提示按一下reset按钮<br><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/web3.png" title="WiFi_pineapples初始化"><br>选择一个下载的文件点击<code>upgrade</code><br><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/web4.png" title="WiFi_pineapples初始化"><br>更新完了之后就得到了下面的这个页面<br><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/web5.png" title="WiFi_pineapples初始化"><br><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/web6.png" title="WiFi_pineapples初始化"><br><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/web7.png" title="WiFi_pineapples初始化"><br>按照提示按下<code>reset</code>按钮，来到了我们比较常见的教程上的界面，可能会掉线重新链接一下就行<br><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/begin.png" title="WiFi_pineapples初始化"><br>password: <code>wifisrtwifi</code><br><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/password.png" title="WiFi_pineapples初始化"><br>password2: <code>srtwifisrt</code><br><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/password2.png" title="WiFi_pineapples初始化"><br><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/ending.png" title="WiFi_pineapples初始化"><br>提交了上面的信息之后，我的掉线了一次而且再连接的时候就会换了一个WiFi名称。再次连接的时候出现下面的额登录界面<br><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/login.png" title="WiFi_pineapples初始化"><br>到下面这一步就初始化完成了<br><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/start.png" title="WiFi_pineapples初始化"></p><p><span id="ssh"></span></p><h2 id="SSH连接"><a href="#SSH连接" class="headerlink" title="SSH连接"></a>SSH连接</h2><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/ssh.png" title="WiFi_pineapples初始化"><p><span id="internet"></span></p><h2 id="连接互联网"><a href="#连接互联网" class="headerlink" title="连接互联网"></a>连接互联网</h2><blockquote><p><code>Networking</code> &gt;&gt;&gt;<code>WiFi Client Mode</code>在这里扫描可以连接互联网的wifi，然后输入对应的密码就可以了</p></blockquote><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/modules.png" title="WiFi_pineapples初始化"><p><span id="modules"></span></p><h2 id="安装插件模块（modules）"><a href="#安装插件模块（modules）" class="headerlink" title="安装插件模块（modules）"></a>安装插件模块（modules）</h2><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/modules.png" title="WiFi_pineapples初始化"><blockquote><p>安装之前建议安装一个SD卡，也可以选择不安装，但设备强烈建议安装，那就搞一个吧</p></blockquote><p><span id="SD_card"></span></p><h3 id="安装SD卡"><a href="#安装SD卡" class="headerlink" title="安装SD卡"></a>安装SD卡</h3><p>折腾了老半天才搞明白，教程上所说的执行命令<code>sd.sh</code>，但实际上这里就没有这个命令脚本，查资料好久才发现实际这个脚本是要自己上传上去的。</p><ul><li><p>上传脚本</p>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /root/Desktop/WIFIattcker/sd.sh root@172.16.42.1:/bin</span><br></pre></td></tr></table></figure><blockquote><p>前提是你要搞得到这个文件<strong>sd.sh</strong>，上传之后就是下面的样子，自己提权（chmod）</p></blockquote>  <img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/scp.png" title="WiFi_pineapples初始化">  <img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/anzhuang.png" title="WiFi_pineapples初始化">  <img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/sd-sh.png" title="WiFi_pineapples初始化"><blockquote><p>大概网上还有另一个教程是通过一系列的命令完成的，我觉得这个脚本就是将所有的命令直接写成了一个脚本</p></blockquote></li><li><p>理论上如果成功的话应该就是到了下面这一步</p>  <img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/sd.png" title="WiFi_pineapples初始化"><blockquote><p>最下面还是有了两个3.6G的空间，具体为什么不知道，还存在一个问题就是在执行脚本的时候报出来一个错误，具体原因未知，实际上这里应该是有一个或者在rootfs的位置是最大的，总之是和之前能查到的教程上的不一样，不过在安装插件的时候这里有了另一个选择项，如下图所示</p></blockquote>  <img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/maby.png" title="WiFi_pineapples初始化"></li><li><p>再之后就按照之前的步骤，在网页版上直接安装就可以啦，选择<code>Install to SD card</code></p><ul><li><p>安装成功的会在下面显示</p><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/installed.png" title="WiFi_pineapples初始化"></li></ul></li></ul><hr><blockquote><p>到目前为止就可以开始使用这个工具了</p></blockquote><hr><p><span id="begin"></span></p><h2 id="界面初识"><a href="#界面初识" class="headerlink" title="界面初识"></a>界面初识</h2><blockquote><p>这里简单的认识一下这几个界面，昨天晚上花了一点时间把所有插件都安装上了，反正内存也扩充过了，为了以后方便，就都装上了</p></blockquote><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/board1.png" title="WiFi_pineapples初始化"><h3 id="Dashboard"><a href="#Dashboard" class="headerlink" title="Dashboard"></a>Dashboard</h3><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/dashboard.png" title="WiFi_pineapples初始化"><h3 id="Recon"><a href="#Recon" class="headerlink" title="Recon"></a>Recon</h3><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/recon.png" title="WiFi_pineapples初始化"><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/recon1.png" title="WiFi_pineapples初始化"><h3 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h3><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/client.png" title="WiFi_pineapples初始化"><h3 id="Tracking"><a href="#Tracking" class="headerlink" title="Tracking"></a>Tracking</h3><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/tracking.png" title="WiFi_pineapples初始化"><h3 id="Filters"><a href="#Filters" class="headerlink" title="Filters"></a>Filters</h3><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/filters.png" title="WiFi_pineapples初始化"><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/filters1.png" title="WiFi_pineapples初始化"><h3 id="PineAP"><a href="#PineAP" class="headerlink" title="PineAP"></a>PineAP</h3><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/pineap.png" title="WiFi_pineapples初始化"><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/pineap1.png" title="WiFi_pineapples初始化"><p><span id="module"></span></p><h2 id="插件简介"><a href="#插件简介" class="headerlink" title="插件简介"></a>插件简介</h2><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/module.png" title="WiFi_pineapples初始化"><img src="/2019/02/23/WiFi-pineapples初始化/images/2019/02/module1.png" title="WiFi_pineapples初始化">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;WIFI-Pinapple使用说明&quot;&gt;&lt;a href=&quot;#WIFI-Pinapple使用说明&quot; class=&quot;headerlink&quot; title=&quot;WIFI Pinapple使用说明&quot;&gt;&lt;/a&gt;&lt;strong&gt;WIFI Pina
+      
+    
+    </summary>
+    
+      <category term="渗透测试" scheme="https://github.com/JD1412/JD1412.github.io.git/categories/security/"/>
+    
+    
+      <category term="WIFI" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/WIFI/"/>
+    
+      <category term="WIFI-Pineapples" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/WIFI-Pineapples/"/>
+    
+  </entry>
   
   <entry>
     <title>WIFI密码破解</title>
@@ -122,9 +150,9 @@
     
       <category term="Ettercap" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Ettercap/"/>
     
-      <category term="MITM" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/MITM/"/>
-    
       <category term="driftnet" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/driftnet/"/>
+    
+      <category term="MITM" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/MITM/"/>
     
       <category term="DNS欺骗" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/DNS%E6%AC%BA%E9%AA%97/"/>
     
@@ -387,13 +415,13 @@
       <category term="渗透测试" scheme="https://github.com/JD1412/JD1412.github.io.git/categories/security/"/>
     
     
+      <category term="Eclipsedwing" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Eclipsedwing/"/>
+    
       <category term="NSA武器库" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/NSA%E6%AD%A6%E5%99%A8%E5%BA%93/"/>
     
       <category term="Fuzzbunch" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Fuzzbunch/"/>
     
       <category term="meterpreter" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/meterpreter/"/>
-    
-      <category term="Eclipsedwing" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Eclipsedwing/"/>
     
   </entry>
   
@@ -684,38 +712,6 @@
       <category term="CTF" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/CTF/"/>
     
       <category term="Misc" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Misc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2017湖湘杯pwn200_wp_格式化字符串漏洞</title>
-    <link href="https://github.com/JD1412/JD1412.github.io.git/2019/01/14/2017%E6%B9%96%E6%B9%98%E6%9D%AFpwn200-wp-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/"/>
-    <id>https://github.com/JD1412/JD1412.github.io.git/2019/01/14/2017湖湘杯pwn200-wp-格式化字符串漏洞/</id>
-    <published>2019-01-13T23:50:39.000Z</published>
-    <updated>2019-01-13T23:52:37.385Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="这篇博客看我的CSDN上的吧！"><a href="#这篇博客看我的CSDN上的吧！" class="headerlink" title="这篇博客看我的CSDN上的吧！"></a>这篇博客看我的CSDN上的吧！</h1><blockquote><p><a href="https://blog.csdn.net/aptx4869_li/article/details/78950337" target="_blank" rel="noopener">https://blog.csdn.net/aptx4869_li/article/details/78950337</a></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;这篇博客看我的CSDN上的吧！&quot;&gt;&lt;a href=&quot;#这篇博客看我的CSDN上的吧！&quot; class=&quot;headerlink&quot; title=&quot;这篇博客看我的CSDN上的吧！&quot;&gt;&lt;/a&gt;这篇博客看我的CSDN上的吧！&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;a hr
-      
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://github.com/JD1412/JD1412.github.io.git/categories/ctf/"/>
-    
-    
-      <category term="PWN" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/PWN/"/>
-    
-      <category term="CANARY" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/CANARY/"/>
-    
-      <category term="Writeup" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Writeup/"/>
-    
-      <category term="格式化字符串" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   

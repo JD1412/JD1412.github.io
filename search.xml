@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[WiFi_pineapples初始化]]></title>
+    <url>%2F2019%2F02%2F23%2FWiFi-pineapples%E5%88%9D%E5%A7%8B%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[WIFI Pinapple使用说明 目录 开机加电 登录WEB界面 SSH连接 连接互联网 安装插件模块 安装SD卡 界面初识 插件简介 找到一个WIFI pinapple，不知道怎么用，这篇笔记用来记录这个东西如何使用的 加电开机 两个USB接口，第一反应往自己的电脑上面连接，发现自己的电脑连上之后就上不了网了，其实很简单拿个充电宝供电就可以了，和下面的这个教程上的有一点点不一样 登录WEB界面 登录web界面需要另一个网卡，就是一个保证自己电脑的上网，另一个保证连接这个WiFiPineapple 按照提示按一下reset按钮选择一个下载的文件点击upgrade更新完了之后就得到了下面的这个页面按照提示按下reset按钮，来到了我们比较常见的教程上的界面，可能会掉线重新链接一下就行password: wifisrtwifipassword2: srtwifisrt提交了上面的信息之后，我的掉线了一次而且再连接的时候就会换了一个WiFi名称。再次连接的时候出现下面的额登录界面到下面这一步就初始化完成了 SSH连接 连接互联网 Networking &gt;&gt;&gt;WiFi Client Mode在这里扫描可以连接互联网的wifi，然后输入对应的密码就可以了 安装插件模块（modules） 安装之前建议安装一个SD卡，也可以选择不安装，但设备强烈建议安装，那就搞一个吧 安装SD卡折腾了老半天才搞明白，教程上所说的执行命令sd.sh，但实际上这里就没有这个命令脚本，查资料好久才发现实际这个脚本是要自己上传上去的。 上传脚本 1scp /root/Desktop/WIFIattcker/sd.sh root@172.16.42.1:/bin 前提是你要搞得到这个文件sd.sh，上传之后就是下面的样子，自己提权（chmod） 大概网上还有另一个教程是通过一系列的命令完成的，我觉得这个脚本就是将所有的命令直接写成了一个脚本 理论上如果成功的话应该就是到了下面这一步 最下面还是有了两个3.6G的空间，具体为什么不知道，还存在一个问题就是在执行脚本的时候报出来一个错误，具体原因未知，实际上这里应该是有一个或者在rootfs的位置是最大的，总之是和之前能查到的教程上的不一样，不过在安装插件的时候这里有了另一个选择项，如下图所示 再之后就按照之前的步骤，在网页版上直接安装就可以啦，选择Install to SD card 安装成功的会在下面显示 到目前为止就可以开始使用这个工具了 界面初识 这里简单的认识一下这几个界面，昨天晚上花了一点时间把所有插件都安装上了，反正内存也扩充过了，为了以后方便，就都装上了 Dashboard Recon Client Tracking Filters PineAP 插件简介]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>WIFI</tag>
+        <tag>WIFI-Pineapples</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[WIFI密码破解]]></title>
     <url>%2F2019%2F01%2F15%2FWIFI%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[]]></content>
@@ -34,8 +46,8 @@
       <tags>
         <tag>arpspoof</tag>
         <tag>Ettercap</tag>
-        <tag>MITM</tag>
         <tag>driftnet</tag>
+        <tag>MITM</tag>
         <tag>DNS欺骗</tag>
       </tags>
   </entry>
@@ -129,10 +141,10 @@
         <category>渗透测试</category>
       </categories>
       <tags>
+        <tag>Eclipsedwing</tag>
         <tag>NSA武器库</tag>
         <tag>Fuzzbunch</tag>
         <tag>meterpreter</tag>
-        <tag>Eclipsedwing</tag>
       </tags>
   </entry>
   <entry>
@@ -614,8 +626,8 @@
         <tag>ARP欺骗</tag>
         <tag>arpspoof</tag>
         <tag>KALI</tag>
-        <tag>driftnet</tag>
         <tag>图片</tag>
+        <tag>driftnet</tag>
       </tags>
   </entry>
   <entry>
