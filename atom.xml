@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/JD1412/JD1412.github.io.git/"/>
-  <updated>2019-02-24T12:09:29.162Z</updated>
+  <updated>2019-02-25T05:40:30.239Z</updated>
   <id>https://github.com/JD1412/JD1412.github.io.git/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>WiFi_Pineapples固件提取.md</title>
+    <title>WiFi_Pineapples固件提取</title>
     <link href="https://github.com/JD1412/JD1412.github.io.git/2019/02/24/WiFi-Pineapples%E5%9B%BA%E4%BB%B6%E6%8F%90%E5%8F%96-md/"/>
     <id>https://github.com/JD1412/JD1412.github.io.git/2019/02/24/WiFi-Pineapples固件提取-md/</id>
     <published>2019-02-24T11:52:59.000Z</published>
-    <updated>2019-02-24T12:09:29.162Z</updated>
+    <updated>2019-02-25T05:40:30.239Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a><h1 id="WIFI-Pineapples固件提取"><a href="#WIFI-Pineapples固件提取" class="headerlink" title="WIFI_Pineapples固件提取"></a><strong>WIFI_Pineapples固件提取</strong></h1><hr><h2 id="TOC"><a href="#TOC" class="headerlink" title="[TOC]"></a>[TOC]</h2><blockquote><p>为什么要提取固件？是因为又一次误删导致少了一个文件，又不想重新刷系统所以就想着把固件提取出来之后，再复制该文件到原来的位置</p></blockquote><h2 id="文件分析"><a href="#文件分析" class="headerlink" title="文件分析"></a>文件分析</h2><img src="/2019/02/24/WiFi-Pineapples固件提取-md/binwlak.png" title="WiFi-Pineapples固件提取-md"><blockquote><p>这里注意两个参数，第二段开始的参数<code>1158488</code>，后面的<code>size: 12956900</code></p></blockquote><h2 id="文件分割"><a href="#文件分割" class="headerlink" title="文件分割"></a>文件分割</h2><img src="/2019/02/24/WiFi-Pineapples固件提取-md/dd.png" title="WiFi-Pineapples固件提取-md"><img src="/2019/02/24/WiFi-Pineapples固件提取-md/file.png" title="WiFi-Pineapples固件提取-md"><h2 id="提取"><a href="#提取" class="headerlink" title="提取"></a>提取</h2><img src="/2019/02/24/WiFi-Pineapples固件提取-md/unsquashfs.png" title="WiFi-Pineapples固件提取-md"><h2 id="提取结果"><a href="#提取结果" class="headerlink" title="提取结果"></a>提取结果</h2><img src="/2019/02/24/WiFi-Pineapples固件提取-md/result1.png" title="WiFi-Pineapples固件提取-md">]]></content>
     
@@ -45,11 +45,11 @@
   </entry>
   
   <entry>
-    <title>WIFI_Pineapples_Themes.md</title>
+    <title>WIFI_Pineapples_Themes</title>
     <link href="https://github.com/JD1412/JD1412.github.io.git/2019/02/24/WIFI-Pineapples-Themes-md/"/>
     <id>https://github.com/JD1412/JD1412.github.io.git/2019/02/24/WIFI-Pineapples-Themes-md/</id>
     <published>2019-02-24T11:45:05.000Z</published>
-    <updated>2019-02-24T11:47:07.625Z</updated>
+    <updated>2019-02-25T05:40:16.903Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a><h1 id="WIFI-Pineapples-Themes"><a href="#WIFI-Pineapples-Themes" class="headerlink" title="WIFI_Pineapples Themes"></a><strong>WIFI_Pineapples Themes</strong></h1><hr><blockquote><p>这个比较鸡肋，大概选一个自己喜欢的界面就可以了</p></blockquote><h2 id="malware"><a href="#malware" class="headerlink" title="malware"></a>malware</h2><img src="/2019/02/24/WIFI-Pineapples-Themes-md/themes.png" title="WIFI_Pineapples_Themes"><h2 id="1980"><a href="#1980" class="headerlink" title="1980"></a>1980</h2><img src="/2019/02/24/WIFI-Pineapples-Themes-md/1980.png" title="WIFI_Pineapples_Themes">]]></content>
     
@@ -73,11 +73,11 @@
   </entry>
   
   <entry>
-    <title>WIFI_Pineapples_Modules.md</title>
+    <title>WIFI_Pineapples_Modules</title>
     <link href="https://github.com/JD1412/JD1412.github.io.git/2019/02/24/WIFI-Pineapples-Modules-md/"/>
     <id>https://github.com/JD1412/JD1412.github.io.git/2019/02/24/WIFI-Pineapples-Modules-md/</id>
     <published>2019-02-24T11:37:36.000Z</published>
-    <updated>2019-02-24T11:39:19.407Z</updated>
+    <updated>2019-02-25T05:40:06.871Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a><h1 id="WIFI-Pineapples-Modules"><a href="#WIFI-Pineapples-Modules" class="headerlink" title="WIFI_Pineapples Modules"></a><strong>WIFI_Pineapples Modules</strong></h1><blockquote><p>整体上网页版的使用有时候可能与实际设备的状态不是很同步，以及会遇到一些奇奇怪怪的问题，不过无伤大雅</p></blockquote><h2 id="插件概况"><a href="#插件概况" class="headerlink" title="插件概况"></a>插件概况</h2><blockquote><p>一开始可能不是这样子的，按照上面的提示安装依赖就可以了</p></blockquote><img src="/2019/02/24/WIFI-Pineapples-Modules-md/deauth.png" title="WIFI_Pineapples_Modules"><h2 id="文件传输"><a href="#文件传输" class="headerlink" title="文件传输"></a>文件传输</h2><blockquote><p>使用期间应该是需要使用到一些文件的传递功能，但是目前WiFi Pineapples只有一个web管理界面和一个ssh的终端，web界面可以实现一些单个文件或文件夹的创建，但是要上传的文件多了这样一个一个创建未免有点麻烦，可以使用下面的这个命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scp file user@ip:/dir  #上传</span><br><span class="line">scp user@ip：/file dir  #下载</span><br><span class="line">example:</span><br><span class="line">    root@kali:~# scp login root@192.168.1.6:/www</span><br></pre></td></tr></table></figure></p></blockquote><h2 id="网卡区分"><a href="#网卡区分" class="headerlink" title="网卡区分"></a>网卡区分</h2><img src="/2019/02/24/WIFI-Pineapples-Modules-md/wlan.png" title="WIFI_Pineapples_Modules"><blockquote><p>在使用一些功能的时候，要注意网卡的状态，这个wlan1是有可能变成wlan1mon的监听状态的</p></blockquote><h2 id="故障处理–Read-only-file-system"><a href="#故障处理–Read-only-file-system" class="headerlink" title="故障处理–Read-only file system"></a>故障处理–<code>Read-only file system</code></h2><p><code>mount -o remount,rw /</code></p><blockquote><p>因为一个错误的操作导致WiFi Pineapples的文件系统变成了<code>Read-only file system</code>，通过这个命令重新挂载一下，添加写权限</p></blockquote><h2 id="设备网卡信息"><a href="#设备网卡信息" class="headerlink" title="设备网卡信息"></a>设备网卡信息</h2><img src="/2019/02/24/WIFI-Pineapples-Modules-md/ifconfig.png" title="WIFI_Pineapples_Modules"><blockquote><p>wlan1 连接的是互联网，wlan0、wlan0-1网卡没有使用</p></blockquote><h2 id="Deauth取消身份认证"><a href="#Deauth取消身份认证" class="headerlink" title="Deauth取消身份认证"></a>Deauth取消身份认证</h2><blockquote><p>随便试了试，嗯，很好每次都能把自己成功踢下线再也连不上WIFI_Pineapples</p></blockquote><img src="/2019/02/24/WIFI-Pineapples-Modules-md/deauth1.png" title="WIFI_Pineapples_Modules"><blockquote><p>这个是成功之后的样子，直接用这个去攻击得到的结果是这样的，确实会造成掉线</p></blockquote><h3 id="电脑端掉线现象"><a href="#电脑端掉线现象" class="headerlink" title="电脑端掉线现象"></a>电脑端掉线现象</h3><img src="/2019/02/24/WIFI-Pineapples-Modules-md/pc.png" title="WIFI_Pineapples_Modules"> <img src="/2019/02/24/WIFI-Pineapples-Modules-md/pc1.png" title="WIFI_Pineapples_Modules"><h3 id="手机端掉线现象"><a href="#手机端掉线现象" class="headerlink" title="手机端掉线现象"></a>手机端掉线现象</h3><img src="/2019/02/24/WIFI-Pineapples-Modules-md/1.png" title="WIFI_Pineapples_Modules"><p>=============================================================================<br><img src="/2019/02/24/WIFI-Pineapples-Modules-md/2.png" title="WIFI_Pineapples_Modules"></p><blockquote><p>这是攻击记录，其中比较详细的体现踢掉了哪些用户</p></blockquote><img src="/2019/02/24/WIFI-Pineapples-Modules-md/re.png" title="WIFI_Pineapples_Modules"><h3 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h3><p><strong>重要的事情先强调一下，新手不要选择<code>Start on boot</code>，具体原因后面有</strong></p><h4 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h4><img src="/2019/02/24/WIFI-Pineapples-Modules-md/controls.png" title="WIFI_Pineapples_Modules"><ul><li><code>Installed</code>没什么用，安装好之后就是这样，再点的话就是移除工具</li><li><code>Start</code>点击之前看好网卡，一般是选择<code>wlan1</code>，因为我试了其他的两块wlan的网卡都不好使，有时候点完start网卡状态会先变到<code>wlan1mon</code>这时候可能需要再点击一下，有时候不需要，最好是直接刷新一下网页，一般点一下就直接开始了</li><li><code>Start on boot</code>估计是开机启动，建议不配置，默认<code>off</code>。<blockquote><h4 id="I-killed-myself"><a href="#I-killed-myself" class="headerlink" title="I killed myself"></a>I killed myself</h4><p>一开始的时候发生了一点意外，因为选了开机启动，又没有把连接设备的控制WiFi名过滤掉，导致这边点击<code>Start</code>之后，把控制端也给干掉了，控制端连不上也就不能停止干扰，设备失控了，然后重启，好嘛，攻击开机自启动，重启也没用。害的我只好按<code>Reset</code>，从头再来。</p></blockquote></li></ul><h4 id="Setting"><a href="#Setting" class="headerlink" title="Setting"></a>Setting</h4><img src="/2019/02/24/WIFI-Pineapples-Modules-md/setting.png" title="WIFI_Pineapples_Modules"><blockquote><p>这个里面就是选择你的攻击模式，我是选择了黑名单（包含受害者WiFi，不包含控制WiFi），这样起到的效果比较成功</p></blockquote><h4 id="Editor"><a href="#Editor" class="headerlink" title="Editor"></a>Editor</h4><img src="/2019/02/24/WIFI-Pineapples-Modules-md/editor.png" title="WIFI_Pineapples_Modules"><blockquote><p>应该挺好理解的，自己试一下就行了</p></blockquote><h2 id="Nmap扫描"><a href="#Nmap扫描" class="headerlink" title="Nmap扫描"></a>Nmap扫描</h2><img src="/2019/02/24/WIFI-Pineapples-Modules-md/nmap.png" title="WIFI_Pineapples_Modules"><blockquote><p>扫描结果错误，具体原因未知，使用方法和zenmap的使用方法几乎一致，若干天之后发现可以正常使用，扫描的结果如下图所示，扫描结果可以在网页上查看也可以通过浏览器下载为文本查看</p></blockquote><img src="/2019/02/24/WIFI-Pineapples-Modules-md/nmap1.png" title="WIFI_Pineapples_Modules"><h2 id="Dwall绵羊墙"><a href="#Dwall绵羊墙" class="headerlink" title="Dwall绵羊墙"></a>Dwall绵羊墙</h2><img src="/2019/02/24/WIFI-Pineapples-Modules-md/dwall.png" title="WIFI_Pineapples_Modules"><blockquote><p>这个功能没有什么需要配置的，直接按照默认的提示操作就可以啦，还有就是注意连接的WiFi名称，一开始以为<code>Management SSID</code>就是专门用来管理的，开放WiFi是用来让被攻击者连接的，导致连接了好久都连不上<code>Open SSID</code>，实际上就还是直接连接<code>Management SSID</code>就可以啦，目前还不知道这个WiFi接入点是用来干什么的</p></blockquote><blockquote><p>Dwall抓到的图片基本上都是http网页上传输的图片，https的好像不行</p></blockquote><h2 id="Recon-扫描"><a href="#Recon-扫描" class="headerlink" title="Recon 扫描"></a>Recon 扫描</h2><img src="/2019/02/24/WIFI-Pineapples-Modules-md/recon12.png" title="WIFI_Pineapples_Modules"><h2 id="Cabinet-文件管理器"><a href="#Cabinet-文件管理器" class="headerlink" title="Cabinet 文件管理器"></a>Cabinet 文件管理器</h2><img src="/2019/02/24/WIFI-Pineapples-Modules-md/cabinet.png" title="WIFI_Pineapples_Modules"><blockquote><p>就是提供了一个网页版的文件管理器可以查看文件、下载文件、修改文件。</p></blockquote><h2 id="ConnectedClients"><a href="#ConnectedClients" class="headerlink" title="ConnectedClients"></a>ConnectedClients</h2><img src="/2019/02/24/WIFI-Pineapples-Modules-md/connectedclient.png" title="WIFI_Pineapples_Modules"><blockquote><p>这里显示一些连接上AP的客户端信息</p></blockquote>]]></content>
     
@@ -501,13 +501,13 @@
       <category term="渗透测试" scheme="https://github.com/JD1412/JD1412.github.io.git/categories/security/"/>
     
     
-      <category term="Eclipsedwing" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Eclipsedwing/"/>
-    
       <category term="NSA武器库" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/NSA%E6%AD%A6%E5%99%A8%E5%BA%93/"/>
     
       <category term="Fuzzbunch" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Fuzzbunch/"/>
     
       <category term="meterpreter" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/meterpreter/"/>
+    
+      <category term="Eclipsedwing" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Eclipsedwing/"/>
     
   </entry>
   
