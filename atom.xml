@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/JD1412/JD1412.github.io.git/"/>
-  <updated>2019-03-10T13:04:31.362Z</updated>
+  <updated>2019-03-13T07:31:10.306Z</updated>
   <id>https://github.com/JD1412/JD1412.github.io.git/</id>
   
   <author>
@@ -15,6 +15,74 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Kali_Software_Configration</title>
+    <link href="https://github.com/JD1412/JD1412.github.io.git/2019/03/13/Kali-Software-Configration/"/>
+    <id>https://github.com/JD1412/JD1412.github.io.git/2019/03/13/Kali-Software-Configration/</id>
+    <published>2019-03-13T07:27:05.000Z</published>
+    <updated>2019-03-13T07:31:10.306Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a><h1 id="安装Kali之后要安装的软件"><a href="#安装Kali之后要安装的软件" class="headerlink" title="安装Kali之后要安装的软件"></a>安装Kali之后要安装的软件</h1><p><a href="https://secretwiki.org/2017/05/30/kali-install/" title="lianjie" target="_blank" rel="noopener">测试连接</a></p><h2 id="替换更新源（按需所取吧亲）"><a href="#替换更新源（按需所取吧亲）" class="headerlink" title="替换更新源（按需所取吧亲）"></a>替换更新源（按需所取吧亲）</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>auto</span><br><span class="line">deb http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>中科大</span><br><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>浙大</span><br><span class="line">deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>东软大学</span><br><span class="line">deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line">deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>重庆大学</span><br><span class="line">deb http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>官方源</span><br><span class="line"><span class="meta">#</span>deb http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line"><span class="meta">#</span>deb-src http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>阿里云</span><br><span class="line">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>清华大学</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br></pre></td></tr></table></figure><h2 id="常用的更新命令"><a href="#常用的更新命令" class="headerlink" title="常用的更新命令"></a>常用的更新命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apt-get clean    //清除缓存索引</span><br><span class="line">apt-get update    //更新索引文件</span><br><span class="line">apt-get remove .*(安装包的名字) //卸载软件</span><br><span class="line">apt-get purge .*(安装包的名字) //完全卸载软件</span><br><span class="line">apt-get upgrade    //更新实际的软件包文件</span><br><span class="line">apt-get dist-upgrade    //根据依赖关系更新</span><br></pre></td></tr></table></figure><h2 id="安装gdebi"><a href="#安装gdebi" class="headerlink" title="安装gdebi"></a>安装<strong>gdebi</strong></h2><blockquote><p>在安装别的软件之前，先装这个后面会比较方便</p></blockquote><p><code>apt install gdebi</code></p><h2 id="安装中文输入法"><a href="#安装中文输入法" class="headerlink" title="安装中文输入法"></a>安装中文输入法</h2><h3 id="搜狗拼音输入法"><a href="#搜狗拼音输入法" class="headerlink" title="搜狗拼音输入法"></a>搜狗拼音输入法</h3><blockquote><p>建议直接去下deb的包</p></blockquote><p><a href="https://pinyin.sogou.com/linux/" title="Sougou" target="_blank" rel="noopener">搜狗拼音</a></p><p><code>gdebi sogoupinyin_2.2.0.0108_amd64.deb</code></p><h3 id="Google拼音输入法"><a href="#Google拼音输入法" class="headerlink" title="Google拼音输入法"></a>Google拼音输入法</h3><p><code>apt-get install fcitx</code><br><code>apt-get install fcitx-googlepinyin</code></p><blockquote><p>安装完自己需要再配置一下</p></blockquote><h2 id="安装浏览器"><a href="#安装浏览器" class="headerlink" title="安装浏览器"></a>安装浏览器</h2><h3 id="Google-Chrome"><a href="#Google-Chrome" class="headerlink" title="Google Chrome"></a>Google Chrome</h3><blockquote><p>好像有直接的命令，我是下的deb包,root用户不能运行</p></blockquote><p><code>gdebi google-chrome-stable_current_amd64.deb</code></p><h3 id="Firefox"><a href="#Firefox" class="headerlink" title="Firefox"></a>Firefox</h3><blockquote><p>自己就有更新一下就可以啦</p></blockquote><h2 id="Tor"><a href="#Tor" class="headerlink" title="Tor"></a>Tor</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install tor</span><br><span class="line">service tor start</span><br></pre></td></tr></table></figure><p><a href="http://os.51cto.com/art/201405/439494_all.htm" title="TOR教程" target="_blank" rel="noopener">TOR使用</a></p><h2 id="QQ"><a href="#QQ" class="headerlink" title="QQ"></a>QQ</h2><blockquote><p>建议使用一个APPimage文件，wine经常会报一些错误搞不懂，同一个源的QQ能运行，但是在我的电脑上不能输入中文</p></blockquote><p><code>http://yun.tzmm.com.cn/index.php/s/5hJNzt2VR9aIEF2</code><br><code>TIM-x86_64.AppImage</code></p><h2 id="Wechat"><a href="#Wechat" class="headerlink" title="Wechat"></a>Wechat</h2><p><code>https://github.com/geeeeeeeeek/electronic-wechat</code></p><blockquote><p>我用的上面的装的，后面发现好像可以直接有压缩包，没试过应该会更好一点吧</p></blockquote><p><code>https://github.com/geeeeeeeeek/electronic-wechat/releases</code><br><code>https://github.com/trazyn/weweChat/releases</code></p><h2 id="SublimeText"><a href="#SublimeText" class="headerlink" title="SublimeText"></a>SublimeText</h2><p><code>https://www.sublimetext.com/3</code></p><blockquote><p>好像也有命令行的直接安装</p></blockquote><h2 id="Atom"><a href="#Atom" class="headerlink" title="Atom"></a>Atom</h2><p><code>gdebi atom-amd64.deb</code></p><h2 id="Crossover"><a href="#Crossover" class="headerlink" title="Crossover"></a>Crossover</h2><p><code>gdebi crossover_16.2.0-1.deb</code></p><h2 id="网易云音乐"><a href="#网易云音乐" class="headerlink" title="网易云音乐"></a>网易云音乐</h2><p><code>gdebi netease-cloud-music_1.1.0_amd64_ubuntu.deb</code></p><h2 id="PyCharm"><a href="#PyCharm" class="headerlink" title="PyCharm"></a>PyCharm</h2><p><code>pycharm-professional-2018.1.4.tar.gz</code></p><blockquote><p>直接下载安装包提取就能用</p></blockquote><h2 id="Pwntools"><a href="#Pwntools" class="headerlink" title="Pwntools"></a>Pwntools</h2><p><code>pip install pwntools</code></p><blockquote><p>一定要网好不然老断线</p></blockquote><h2 id="GDB（peda、gef、pwndbg）"><a href="#GDB（peda、gef、pwndbg）" class="headerlink" title="GDB（peda、gef、pwndbg）"></a>GDB（peda、gef、pwndbg）</h2><p><code>https://blog.csdn.net/aptx4869_li/article/details/81566541</code></p><h2 id="Aria2"><a href="#Aria2" class="headerlink" title="Aria2"></a>Aria2</h2><blockquote><p>Linux下不能下载大文件，需要客户端软件，但是百度网盘又没有相应Linux的客户端</p></blockquote><p><code>apt-get install aria2</code></p><h2 id="WPS"><a href="#WPS" class="headerlink" title="WPS"></a>WPS</h2><p><code>http://ftp.us.debian.org/debian/pool/main/libp/libpng/libpng12-0_1.2.49-1+deb7u2_i386.deb</code><br><code>http://www.wps.cn/product/wpslinux/</code></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dpkg -i libpng12-0_1.2.49-1+deb7u2_amd64.deb</span><br><span class="line">dpkg -i wps-office_10.1.0.5672~a21_amd64.deb</span><br></pre></td></tr></table></figure><h2 id="Wine"><a href="#Wine" class="headerlink" title="Wine"></a>Wine</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dpkg --add-architecture i386</span><br><span class="line">apt-get update</span><br><span class="line">apt-get install wine32</span><br></pre></td></tr></table></figure><h2 id="VS-Code"><a href="#VS-Code" class="headerlink" title="VS Code"></a>VS Code</h2><p><code>https://az764295.vo.msecnd.net/stable/1b8e8302e405050205e69b59abb3559592bb9e60/code_1.31.1-1549938243_amd64.deb</code><br><code>gdebi code_1.31.1-1549938243_amd64.deb</code></p><h2 id="Themes-amp-Icon"><a href="#Themes-amp-Icon" class="headerlink" title="Themes &amp;  Icon"></a>Themes &amp;  Icon</h2><p><code>https://www.gnome-look.org/</code></p><blockquote><p>下载自己喜欢的直接复制到<code>/usr/share/themes  &amp;  /usr/share/icons</code>x,之后再到管理界面去配置就可以啦</p></blockquote><h2 id="Synaptic-新立德"><a href="#Synaptic-新立德" class="headerlink" title="Synaptic(新立德)"></a>Synaptic(新立德)</h2><p><code>apt-get install synaptic</code></p><h2 id="视频播放器smplayer"><a href="#视频播放器smplayer" class="headerlink" title="视频播放器smplayer"></a>视频播放器smplayer</h2><p><code>apt-get install smplayer</code></p><h2 id="Terminator"><a href="#Terminator" class="headerlink" title="Terminator"></a>Terminator</h2><p><code>apt-get install terminator</code></p><h2 id="Yum"><a href="#Yum" class="headerlink" title="Yum"></a>Yum</h2><p><code>apt-get install yum</code></p><h2 id="GCC"><a href="#GCC" class="headerlink" title="GCC"></a>GCC</h2><p><code>yum install gcc</code></p><h2 id="32位支持库"><a href="#32位支持库" class="headerlink" title="32位支持库"></a>32位支持库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dpkg --add-architecture i386</span><br><span class="line">apt-get update</span><br><span class="line">apt-get install libc6:i386</span><br><span class="line">apt-get install ia32-libs  libnotify-bin ia32-libs-gtk</span><br><span class="line">apt-get install gcc-multilib</span><br><span class="line">apt-get install g++-multilib</span><br></pre></td></tr></table></figure><h2 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a>Vim</h2><p><code>apt-get install vim</code></p><h2 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h2><p><code>apt-get install ssh</code></p><h2 id="VMware"><a href="#VMware" class="headerlink" title="VMware"></a>VMware</h2><p><code>https://www.vmware.com/products/workstation-pro.html</code></p><p><code>chmod a+x VMware-Workstation-.*.bundle</code><br><code>./VMware-Workstation-.*.bundle</code></p><h2 id="SSR"><a href="#SSR" class="headerlink" title="SSR"></a>SSR</h2><p><code>https://github.com/erguotou520/electron-ssr/releases</code></p><blockquote><p>理论上v2ray也是可以成功的，但是Linux的电脑上还不知道怎么添加v2ray的订阅</p></blockquote><h2 id="GUN-Image-Manipulation-Program-（Linux的PS）"><a href="#GUN-Image-Manipulation-Program-（Linux的PS）" class="headerlink" title="GUN Image Manipulation Program （Linux的PS）"></a>GUN Image Manipulation Program （Linux的PS）</h2><p><code>apt-get install gimp</code></p><h2 id="ShotCut-视频剪辑软件"><a href="#ShotCut-视频剪辑软件" class="headerlink" title="ShotCut (视频剪辑软件)"></a>ShotCut <strong>(视频剪辑软件)</strong></h2><p><code>Shotcut-190228.glibc2.14-x86_64.AppImage</code></p><blockquote><p>建议使用APPimage文件，方便也不用去安装了</p></blockquote><h2 id="解压缩软件"><a href="#解压缩软件" class="headerlink" title="解压缩软件"></a>解压缩软件</h2><p><code>apt-get install file-roller</code><br><code>apt-get install unrar unace rar unrar p7zip zip unzip p7zip-full p7zip-rar file-roller</code></p><h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yogy@kali:~$ sudo apt-get install git</span><br><span class="line">yogy@kali:~$ git config --global user.name "yogykwan"</span><br><span class="line">yogy@kali:~$ git config --global user.email "jingg.cxy@foxmail.com"</span><br></pre></td></tr></table></figure><h2 id="远程桌面客户端"><a href="#远程桌面客户端" class="headerlink" title="远程桌面客户端"></a>远程桌面客户端</h2><p><code>apt-get install gtk-recordmydesktop recordmydesktop remmina -y</code></p><h2 id="NVIDIA"><a href="#NVIDIA" class="headerlink" title="NVIDIA"></a>NVIDIA</h2><p><code>apt-get install nvidia-driver nvidia-xconfig</code></p><h2 id="Hexo（博客软件）"><a href="#Hexo（博客软件）" class="headerlink" title="Hexo（博客软件）"></a>Hexo（博客软件）</h2><p><code>https://hexo.io/zh-cn/docs/</code><br><code>https://www.cnblogs.com/zhaoyu1995/p/6239950.html</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;安装Kali之后要安装的软件&quot;&gt;&lt;a href=&quot;#安装Kali之后要安装的软件&quot; class=&quot;headerlink&quot; title=&quot;安装Kali之后要安装的软件&quot;&gt;&lt;/a&gt;安装Kali之后要安装的软件&lt;/h1&gt;&lt;p&gt;&lt;a h
+      
+    
+    </summary>
+    
+      <category term="Linux入门" scheme="https://github.com/JD1412/JD1412.github.io.git/categories/Linux%E5%85%A5%E9%97%A8/"/>
+    
+    
+      <category term="KALI" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/KALI/"/>
+    
+      <category term="Linux软件" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Linux%E8%BD%AF%E4%BB%B6/"/>
+    
+      <category term="安装Kali-Linux后的配置" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/%E5%AE%89%E8%A3%85Kali-Linux%E5%90%8E%E7%9A%84%E9%85%8D%E7%BD%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kali_Beautify</title>
+    <link href="https://github.com/JD1412/JD1412.github.io.git/2019/03/13/Kali-Beautify/"/>
+    <id>https://github.com/JD1412/JD1412.github.io.git/2019/03/13/Kali-Beautify/</id>
+    <published>2019-03-13T07:10:50.000Z</published>
+    <updated>2019-03-13T07:29:27.749Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a><h1 id="Kali-Linux-Debian-Beautify"><a href="#Kali-Linux-Debian-Beautify" class="headerlink" title="Kali Linux(Debian) Beautify"></a>Kali Linux(Debian) Beautify</h1><blockquote><p>Linux真的是有毒，越用越能感受到他的魅力，快有一个多星期一直没有怎么干正事，捣腾Kali的美化以及一些其他软件的设定，感觉Linux配置好了每次使用都是一种享受</p></blockquote><p><em>生命不息，折腾不止</em></p><p>[TOC]</p><h2 id="桌面美化软件"><a href="#桌面美化软件" class="headerlink" title="桌面美化软件"></a>桌面美化软件</h2><h3 id="Cairo-Dock"><a href="#Cairo-Dock" class="headerlink" title="Cairo-Dock"></a>Cairo-Dock</h3><blockquote><p>感觉这个软件应该算是王者级的相对于其他几个软件，功能比较多，而且效果也比较好，玩了好久，但是也存在一些问题，比如在我的电脑上会对工作空间错误的计数，开的窗口稍微多一点就会有好几十个工作空间，但其实并没有那么多个（也有可能是我没有设置好）</p></blockquote><p>最重要的是：<strong>这个软件提供一个状态栏（应该是叫这个名字吧）就是相当于Windows下的右下角显示网络连接、音量，一些后台运行程序的小图标的那个区域，这个功能我还从来没有在Debian的系统中有见到那个插件可以实现（可能我没发现吧）</strong></p><p>像这样的一个，具体怎么显示也是可以设置的</p><img src="/2019/03/13/Kali-Beautify/notifacation.png" title="Kali-Beautify"><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p><code>apt-get install cairo-dock</code></p><h4 id="运行效果"><a href="#运行效果" class="headerlink" title="运行效果"></a>运行效果</h4><blockquote><p>不想放图片在这里了，因为太多了效果都还比较好看，懒得去做那么多GIF图像了</p></blockquote><hr><h3 id="Plank"><a href="#Plank" class="headerlink" title="Plank"></a>Plank</h3><blockquote><p>建议直接去下载deb的包安装，之前使用<code>apt-get install plank</code>安装，之后运行有问题，然后换了安装之后就好了</p></blockquote><p>貌似比较简单的就能配置了，没发现有动态效果就放弃了，这个软件就不演示了，感兴趣自己试试吧</p><hr><h3 id="Gnome-Pie"><a href="#Gnome-Pie" class="headerlink" title="Gnome-Pie"></a>Gnome-Pie</h3><p>这个软件比较好配置直接安装就好了，软件库里面有，配置起来也比较简单效果自己尝试一下就知道了</p><h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><p><code>apt-get install gnome-pie</code></p><h4 id="运行效果-1"><a href="#运行效果-1" class="headerlink" title="运行效果"></a>运行效果</h4><img src="/2019/03/13/Kali-Beautify/gnomepie.gif" title="Kali-Beautify"><hr><h3 id="Latte-Dock"><a href="#Latte-Dock" class="headerlink" title="Latte Dock"></a>Latte Dock</h3><p>这个软件感觉比<strong>Cairo-Dock</strong>要差一点，功能少一点，个别时候不太稳定，我的电脑刚开机的时候能加载起来，后面就不知道去哪里了，效果可以自己设置，里面的选择比较多，感兴趣自己尝试一下，找到自己喜欢的就可以动画效果比CD少很多，安装软件包在<strong>Software</strong>文件夹里面</p><h4 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h4><p><code>gedbi latte-dock_0.7.4-0ubuntu2_amd64.deb</code></p><h4 id="运行效果-2"><a href="#运行效果-2" class="headerlink" title="运行效果"></a>运行效果</h4><img src="/2019/03/13/Kali-Beautify/latta.gif" title="Kali-Beautify"><hr><h2 id="系统信息监控软件"><a href="#系统信息监控软件" class="headerlink" title="系统信息监控软件"></a>系统信息监控软件</h2><h3 id="Conky"><a href="#Conky" class="headerlink" title="Conky"></a>Conky</h3><h4 id="安装-3"><a href="#安装-3" class="headerlink" title="安装"></a>安装</h4><blockquote><p>Debian下可以直接用这两个命令安装，没有的话，添加<strong>更新源</strong><code>apt-get update</code>一下，应该就可以啦<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get install conky</span><br><span class="line">apt-get install conky-all</span><br><span class="line">gedbi conky-manager-v2.4-amd64.deb</span><br></pre></td></tr></table></figure></p></blockquote><h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><p>我在网上找了一些大佬写的配置文件，挑了几个写的不错的（还有我的机子上能跑的，跑不出来的默认放弃），收集到我的这里，想用哪个的时候可以换一下，理论上是可以自己写的，但是实在是没有那么多时间再去研究这个（或者懒）</p><blockquote><p>配置文件就放在<strong>Conky_configrc</strong>文件夹里面用的时候修改一下文件名就行了，再复制到用户目录下（大概和Desktop一个路径，前面一定要有一个点  <strong>‘</strong>.<strong>‘</strong> ，保存成隐藏文件)</p></blockquote><h4 id="Conky的自启动"><a href="#Conky的自启动" class="headerlink" title="Conky的自启动"></a>Conky的自启动</h4><p>某位大佬这样说道：</p><blockquote><p>网上关于conky的开机自启动都是ubuntu的，在gnome下我试了rc.local, service都不行，最后只能用gnome的启动管理。</p></blockquote><p>配置方法：</p><blockquote><p>在~/.config/autostart/下面新建一个conky.desktop文件，内容如下：</p></blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Type=Application</span><br><span class="line">Name=Conky</span><br><span class="line">Comment=Start conky script</span><br><span class="line">Exec=conky -d        ##命令自己help查看一下就可以啦</span><br><span class="line">OnlyShowIn=GNOME</span><br><span class="line">X-GNOME-Autostart-Phase=Application</span><br><span class="line">Name[en_US]=conky.desktop</span><br></pre></td></tr></table></figure><h4 id="运行效果-3"><a href="#运行效果-3" class="headerlink" title="运行效果"></a>运行效果</h4><img src="/2019/03/13/Kali-Beautify/conky.gif" title="Kali-Beautify"><h3 id="其他系统信息监控的软件不想去试了"><a href="#其他系统信息监控的软件不想去试了" class="headerlink" title="其他系统信息监控的软件不想去试了"></a>其他系统信息监控的软件不想去试了</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;Kali-Linux-Debian-Beautify&quot;&gt;&lt;a href=&quot;#Kali-Linux-Debian-Beautify&quot; class=&quot;headerlink&quot; title=&quot;Kali Linux(Debian) Bea
+      
+    
+    </summary>
+    
+      <category term="Linux入门" scheme="https://github.com/JD1412/JD1412.github.io.git/categories/Linux%E5%85%A5%E9%97%A8/"/>
+    
+    
+      <category term="KALI" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/KALI/"/>
+    
+      <category term="Linux桌面美化" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Linux%E6%A1%8C%E9%9D%A2%E7%BE%8E%E5%8C%96/"/>
+    
+      <category term="Cairo-Dock" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Cairo-Dock/"/>
+    
+      <category term="Plak" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Plak/"/>
+    
+      <category term="Latta Dock" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Latta-Dock/"/>
+    
+      <category term="Gnome-Pie" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Gnome-Pie/"/>
+    
+      <category term="Conky" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Conky/"/>
+    
+  </entry>
   
   <entry>
     <title>Bashrc_config</title>
@@ -626,80 +694,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>GDB插件控制</title>
-    <link href="https://github.com/JD1412/JD1412.github.io.git/2019/01/14/GDB%E6%8F%92%E4%BB%B6%E6%8E%A7%E5%88%B6/"/>
-    <id>https://github.com/JD1412/JD1412.github.io.git/2019/01/14/GDB插件控制/</id>
-    <published>2019-01-14T00:05:23.000Z</published>
-    <updated>2019-01-14T00:06:30.629Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="这篇在CSDN上看吧！"><a href="#这篇在CSDN上看吧！" class="headerlink" title="这篇在CSDN上看吧！"></a>这篇在CSDN上看吧！</h1><blockquote><p><a href="https://blog.csdn.net/aptx4869_li/article/details/81566541" target="_blank" rel="noopener">https://blog.csdn.net/aptx4869_li/article/details/81566541</a></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;这篇在CSDN上看吧！&quot;&gt;&lt;a href=&quot;#这篇在CSDN上看吧！&quot; class=&quot;headerlink&quot; title=&quot;这篇在CSDN上看吧！&quot;&gt;&lt;/a&gt;这篇在CSDN上看吧！&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog
-      
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://github.com/JD1412/JD1412.github.io.git/categories/ctf/"/>
-    
-    
-      <category term="Linux" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Linux/"/>
-    
-      <category term="GDB" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/GDB/"/>
-    
-      <category term="peda" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/peda/"/>
-    
-      <category term="gef" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/gef/"/>
-    
-      <category term="pwndbg" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/pwndbg/"/>
-    
-      <category term="Shell脚本" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/Shell%E8%84%9A%E6%9C%AC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>中级ROP-ret2__libc_csu_init</title>
-    <link href="https://github.com/JD1412/JD1412.github.io.git/2019/01/14/%E4%B8%AD%E7%BA%A7ROP-ret2-libc-csu-init/"/>
-    <id>https://github.com/JD1412/JD1412.github.io.git/2019/01/14/中级ROP-ret2-libc-csu-init/</id>
-    <published>2019-01-14T00:02:55.000Z</published>
-    <updated>2019-01-14T00:04:59.797Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="这篇在CSDN上看吧！"><a href="#这篇在CSDN上看吧！" class="headerlink" title="这篇在CSDN上看吧！"></a>这篇在CSDN上看吧！</h1><blockquote><p><a href="https://blog.csdn.net/aptx4869_li/article/details/81322632" target="_blank" rel="noopener">https://blog.csdn.net/aptx4869_li/article/details/81322632</a></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;这篇在CSDN上看吧！&quot;&gt;&lt;a href=&quot;#这篇在CSDN上看吧！&quot; class=&quot;headerlink&quot; title=&quot;这篇在CSDN上看吧！&quot;&gt;&lt;/a&gt;这篇在CSDN上看吧！&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog
-      
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://github.com/JD1412/JD1412.github.io.git/categories/ctf/"/>
-    
-    
-      <category term="PWN" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/PWN/"/>
-    
-      <category term="IDA" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/IDA/"/>
-    
-      <category term="shell" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/shell/"/>
-    
-      <category term="PWNTOOLS" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/PWNTOOLS/"/>
-    
-      <category term="ROP" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/ROP/"/>
-    
-      <category term="缓冲区溢出" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/"/>
-    
-      <category term="ret2_libc_csu_init" scheme="https://github.com/JD1412/JD1412.github.io.git/tags/ret2-libc-csu-init/"/>
     
   </entry>
   
