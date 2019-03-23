@@ -38,8 +38,8 @@
         <category>Linux入门</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
         <tag>KALI</tag>
+        <tag>Linux</tag>
         <tag>bash美化</tag>
       </tags>
   </entry>
@@ -265,11 +265,11 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
         <tag>GDB</tag>
         <tag>peda</tag>
         <tag>gef</tag>
         <tag>pwndbg</tag>
+        <tag>Linux</tag>
         <tag>Shell脚本</tag>
       </tags>
   </entry>
@@ -449,8 +449,8 @@
       <tags>
         <tag>ARP欺骗</tag>
         <tag>arpspoof</tag>
-        <tag>KALI</tag>
         <tag>Ettercap</tag>
+        <tag>KALI</tag>
       </tags>
   </entry>
   <entry>
